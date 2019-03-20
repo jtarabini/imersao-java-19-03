@@ -8,6 +8,7 @@ out/*
 .idea/*
 build/*
 target/*
+bin/*
 /gradlew
 **/.DS_Store
 **/.settings
