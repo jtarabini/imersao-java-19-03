@@ -14,9 +14,10 @@ import br.com.targettrust.locadora.entidades.Carro;
 public class CarroRepositoryImpl implements CarroRepository {
 
 	@Override
-	public void insertCarro(Carro carro) {
+	public void insertCarro(Carro carro)  {
 		try {
-			String insert = "INSERT INTO carro(" + "	placa, marca, modelo, cor, portas)"
+			String insert = "INSERT INTO carro(" 
+					+ "	placa, marca, modelo, cor, portas)"
 					+ "	VALUES (? , ?, ?, ?, ?)";
 			Connection connection = getConnection();
 			PreparedStatement statement = connection.prepareStatement(insert);
@@ -38,6 +39,26 @@ public class CarroRepositoryImpl implements CarroRepository {
 	@Override
 	public void updateCarro(Carro carro) {
 		// TODO Auto-generated method stub
+		String sql = "UPDATE carro SET "
+				+ "  placa = ?, marca = ?, modelo = ?,"
+				+ "  cor = ?, portas = ?, ano = ? "
+				+ " WHERE id = ? ";
+		try {
+			Connection connection = this.getConnection();
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setString(1, carro.getPlaca());
+			ps.setString(2, carro.getMarca());
+			ps.setString(3, carro.getModelo());
+			ps.setString(4, carro.getCor());
+			ps.setInt(5, carro.getPortas());
+			ps.setInt(6,  carro.getAno());
+			ps.setInt(7, carro.getId());
+			ps.executeUpdate();
+			connection.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 

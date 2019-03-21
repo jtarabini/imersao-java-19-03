@@ -1,6 +1,6 @@
 package br.com.targettrust.locadora.entidades;
 
-public class Veiculo {
+public class Veiculo extends Entidade{
 	
 	private String placa;
 	private Integer ano;
