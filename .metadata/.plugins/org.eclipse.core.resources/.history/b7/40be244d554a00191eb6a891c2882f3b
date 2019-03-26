@@ -1,0 +1,10 @@
+package br.com.targettrust.locadora.db;
+
+import br.com.targettrust.locadora.entidades.Carro;
+
+public interface CarroRepository {
+	
+	void insertCarro(Carro carro);
+	
+
+}

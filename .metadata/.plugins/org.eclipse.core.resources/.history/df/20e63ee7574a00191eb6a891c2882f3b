@@ -1,0 +1,13 @@
+package br.com.targettrust.locadora.input;
+
+import br.com.targettrust.locadora.db.CarroRepository;
+import br.com.targettrust.locadora.db.CarroRepositoryImpl;
+
+public class CarroOutput {
+	
+	public static void main(String[] args) {
+		CarroRepository carroRepository = new CarroRepositoryImpl();
+		carroRepository.listCarros();
+	}
+
+}

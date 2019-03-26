@@ -1,0 +1,13 @@
+package br.com.targettrust.locadora.db;
+
+import br.com.targettrust.locadora.entidades.Carro;
+
+public class CarroRepositoryImpl implements CarroRepository{
+
+	@Override
+	public void insertCarro(Carro carro) {
+		System.out.println(
+				"Carro de placa "+carro.getPlaca()+"inserido com sucesso");		
+	}
+
+}

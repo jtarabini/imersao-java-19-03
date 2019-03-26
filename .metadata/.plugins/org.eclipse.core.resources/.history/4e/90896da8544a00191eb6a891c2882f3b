@@ -1,0 +1,35 @@
+package br.com.targettrust.locadora.db;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+
+import br.com.targettrust.locadora.entidades.Carro;
+
+public class CarroRepositoryImpl implements CarroRepository{
+
+	@Override
+	public void insertCarro(Carro carro) {
+		try {
+			String insert = "INSERT INTO carro(" + 
+					"	placa, marca, modelo, cor, portas)" + 
+					"	VALUES (? , ?, ?, ?, ?)";
+			Connection connection = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/locadora", 
+					"postgres", "postgres");
+			PreparedStatement statement = connection.prepareStatement(insert);
+			statement.setString(1, carro.getPlaca());
+			statement.executeUpdate(insert);
+			statement.close();
+			connection.close();
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		System.out.println(
+				"Carro de placa "+carro.getPlaca()+"inserido com sucesso");		
+	}
+
+}
