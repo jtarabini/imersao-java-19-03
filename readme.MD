@@ -6,4 +6,4 @@ Este repositório contém o conteúdo passado durante as aulas e exercícios pro
 #Aulas:
 * Semana 1
 * Semana 2
-[21/03/2019](./aulas/2019_03_21.md) 
+    * [21/03/2019](./aulas/2019_03_21.md) 
