@@ -2418,3 +2418,21 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2019-03-26 08:56:02.251
 !MESSAGE No repository found at http://download.eclipse.org/windowbuilder/WB/integration/4.7/.
+
+!ENTRY org.eclipse.jface.text 2 0 2019-03-26 10:22:34.724
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2019-03-26 10:22:34.724
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.infinitest.eclipse 1 0 2019-03-26 10:22:35.267
+!MESSAGE locadora Files changed: [C:\Users\instrutor\workspace-thiago\locadora\bin\br\com\targettrust\locadora\db\EquipamentoRepository.class]
+
+!ENTRY org.eclipse.jface.text 2 0 2019-03-26 10:23:16.769
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2019-03-26 10:23:16.770
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.infinitest.eclipse 1 0 2019-03-26 10:23:56.571
+!MESSAGE locadora Files changed: [C:\Users\instrutor\workspace-thiago\locadora\bin\br\com\targettrust\locadora\db\EquipamentoRepository.class]
