@@ -9,7 +9,7 @@ public interface EquipamentoRepository {
 	
 	void insert(Equipamento equipamento) throws SQLException;
 	void update(Equipamento equipamento);
-	void delete(Equipamento equipamento);
+	void delete(Equipamento equipamento) throws SQLException;
 	List<Equipamento> list();
 
 }
