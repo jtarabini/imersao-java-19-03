@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="LibraryTest" project="test-gradle" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="LibraryTest" time="0.005">
-    <testcase name="testSomeLibraryMethod" classname="LibraryTest" time="0.005"/>
-  </testsuite>
-</testrun>

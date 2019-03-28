@@ -1,9 +1,0 @@
-package br.com.targettrust.locadora.db;
-
-import br.com.targettrust.locadora.entidades.Carro;
-
-public interface CarroRepository {
-	
-	Carro findByPlaca(String placa);
-
-}

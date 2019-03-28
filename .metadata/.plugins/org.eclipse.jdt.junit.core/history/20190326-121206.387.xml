@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="EquipamentoRepositoryTest" project="locadora" tests="2" started="2" failures="0" errors="0" ignored="0">
-  <testsuite name="br.com.targettrust.locadora.db.test.EquipamentoRepositoryTest" incomplete="true">
-    <testcase name="basicTest" classname="br.com.targettrust.locadora.db.test.EquipamentoRepositoryTest" time="0.431"/>
-    <testcase name="equipamentoSemDescricaoDeveLancarErro" classname="br.com.targettrust.locadora.db.test.EquipamentoRepositoryTest" incomplete="true"/>
-  </testsuite>
-</testrun>
