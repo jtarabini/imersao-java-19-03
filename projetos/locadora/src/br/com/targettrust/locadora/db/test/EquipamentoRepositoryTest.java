@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.postgresql.util.PSQLException;
 
 import br.com.targettrust.locadora.db.EquipamentoRepository;
 import br.com.targettrust.locadora.db.EquipamentoRepositoryImpl;
@@ -13,7 +12,7 @@ import br.com.targettrust.locadora.exception.EquipamentoJaCadastradoException;
 
 public class EquipamentoRepositoryTest {
 	
-	private EquipamentoRepository equipamentoRepository 
+private EquipamentoRepository equipamentoRepository 
 		= new EquipamentoRepositoryImpl();
 	
 	@Test
