@@ -9,13 +9,24 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.postgresql.util.PSQLException;
+
 import br.com.targettrust.locadora.entidades.Equipamento;
+import br.com.targettrust.locadora.exception.EquipamentoJaCadastradoException;
 
 public class EquipamentoRepositoryImpl implements EquipamentoRepository{
 
 	@Override
-	public void insert(Equipamento equipamento) throws SQLException {
-		// TODO Auto-generated method stub
+	public void insert(Equipamento equipamento) {
+		if(equipamento.getId() != null) {
+			throw new IllegalArgumentException("Para inclusão de veículo o id "
+					+ " não deve ser informado");
+		}
+		if(equipamento.getDescricao() == null ||
+				equipamento.getDescricao().equals("")) {
+			throw new IllegalArgumentException("O campo descrição é obrigatório");
+		}
+		
 		String sql = "insert into EQUIPAMENTO (DESCRICAO ) values ( ? )";
 		try {
 			Connection connection = this.getConnection();
@@ -23,8 +34,12 @@ public class EquipamentoRepositoryImpl implements EquipamentoRepository{
 			ps.setString(1, equipamento.getDescricao());
 			ps.executeUpdate();
 		}
-		catch (SQLException e) {
-			throw e;
+		catch (PSQLException e) {
+			throw new EquipamentoJaCadastradoException();
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 	}
@@ -47,7 +62,7 @@ public class EquipamentoRepositoryImpl implements EquipamentoRepository{
 	}
 
 	@Override
-	public void delete(Equipamento equipamento) throws SQLException {
+	public void delete(Equipamento equipamento) {
 		// TODO Auto-generated method stub
 		String sql = "delete from EQUIPAMENTO where id = ?";
 		try {
@@ -57,7 +72,7 @@ public class EquipamentoRepositoryImpl implements EquipamentoRepository{
 			ps.executeUpdate();
 		}
 		catch(SQLException e) {
-			throw e;
+			e.printStackTrace();
 		}
 		catch (Exception e) {
 			// TODO: handle exception
