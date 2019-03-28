@@ -44,6 +44,16 @@ private EquipamentoRepository equipamentoRepository
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
+	public void equipamentoComDescricaoVaziaDeveLancarErro() throws Exception {
+		// Arrange
+		Equipamento equipamento = new Equipamento();
+		equipamento.setDescricao("    ");
+		// Act
+		equipamentoRepository.insert(equipamento);
+		// Assert - assert não é necessário aqui pois esperamos que uma exception seja lançada		
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
 	public void equipamentoComIdPreenchidoDeveLancarErro() {
 		// Arrange
 		Equipamento equipamento = new Equipamento();
@@ -64,6 +74,24 @@ private EquipamentoRepository equipamentoRepository
 		equipamento2.setDescricao(equipamento1.getDescricao());
 		// Act 
 		equipamentoRepository.insert(equipamento2);
+	}
+	
+	@Test
+	public void basicUpdateTest() {
+		// Arrange
+		Equipamento equipamento = new Equipamento();
+		equipamento.setDescricao("Equipamento de Teste");
+		equipamentoRepository.insert(equipamento);
+		equipamento.setId(
+				equipamentoRepository.findByDescricao(equipamento.getDescricao()).getId()
+				); 
+		equipamento.setDescricao("Equipamento de Teste Alterado");
+		// Act
+		equipamentoRepository.update(equipamento);
+		Equipamento dbEquipamento = 
+				equipamentoRepository.findById(equipamento.getId());
+		// Assert
+		Assert.assertEquals(dbEquipamento.getDescricao(), equipamento.getDescricao());
 	}
 
 }

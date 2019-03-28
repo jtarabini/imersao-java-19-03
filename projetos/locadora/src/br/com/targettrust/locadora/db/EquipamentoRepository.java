@@ -14,4 +14,8 @@ public interface EquipamentoRepository {
 
 	List<Equipamento> list();
 
+	Equipamento findById(Integer id);
+
+	Equipamento findByDescricao(String descricao);
+
 }

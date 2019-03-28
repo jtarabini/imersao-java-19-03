@@ -23,11 +23,11 @@ public class EquipamentoRepositoryImpl implements EquipamentoRepository{
 					+ " não deve ser informado");
 		}
 		if(equipamento.getDescricao() == null ||
-				equipamento.getDescricao().equals("")) {
+				equipamento.getDescricao().trim().equals("")) {
 			throw new IllegalArgumentException("O campo descrição é obrigatório");
 		}
 		
-		String sql = "insert into EQUIPAMENTO (DESCRICAO ) values ( ? )";
+		String sql = "insert into EQUIPAMENTO (DESCRICAO) values ( ? )";
 		try {
 			Connection connection = this.getConnection();
 			PreparedStatement ps = connection.prepareStatement(sql);
@@ -47,8 +47,8 @@ public class EquipamentoRepositoryImpl implements EquipamentoRepository{
 	@Override
 	public void update(Equipamento equipamento) {
 		// TODO Auto-generated method stub
-		String sql = "update EQUIPAMENTO set (descricao) "
-				+ "values ( ? ) where id = ?";
+		String sql = "update EQUIPAMENTO set descricao = ? "
+				+ " where id = ?";
 		try {
 			Connection connection = this.getConnection();
 			PreparedStatement ps = connection.prepareStatement(sql);
@@ -58,6 +58,7 @@ public class EquipamentoRepositoryImpl implements EquipamentoRepository{
 		}
 		catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
@@ -116,6 +117,48 @@ public class EquipamentoRepositoryImpl implements EquipamentoRepository{
 			e.printStackTrace();
 		}
 		return connection;
+	}
+
+	@Override
+	public Equipamento findById(Integer id) {
+		String sql = "select * from EQUIPAMENTO where id = ?";
+		try {
+			Connection connection = this.getConnection();
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				Equipamento equipamento = new Equipamento();
+				equipamento.setId(rs.getInt("id"));
+				equipamento.setDescricao(rs.getString("descricao"));
+				return equipamento;
+			}
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+
+	@Override
+	public Equipamento findByDescricao(String descricao) {
+		String sql = " select * from EQUIPAMENTO where DESCRICAO = ? "; 
+		try {
+			Connection connection = getConnection();
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setString(1, descricao);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				Equipamento equipamento = new Equipamento();
+				equipamento.setId(rs.getInt("id"));
+				equipamento.setDescricao(rs.getString("descricao"));
+				return equipamento;				
+			}
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
 	}
 
 }
