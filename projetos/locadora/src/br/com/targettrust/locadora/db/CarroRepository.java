@@ -15,6 +15,10 @@ public interface CarroRepository {
 	List<Carro> listCarros();
 	
 	void delete(String placa);
+
+	Carro findByPlaca(String placa);
+
+	void delete(Integer id);
 	
 
 }
