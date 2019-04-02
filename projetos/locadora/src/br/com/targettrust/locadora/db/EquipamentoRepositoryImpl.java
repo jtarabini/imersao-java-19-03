@@ -1,7 +1,6 @@
 package br.com.targettrust.locadora.db;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +12,7 @@ import org.postgresql.util.PSQLException;
 
 import br.com.targettrust.locadora.entidades.Equipamento;
 import br.com.targettrust.locadora.exception.EquipamentoJaCadastradoException;
+import br.com.targettrust.locadora.util.DbUtil;
 
 public class EquipamentoRepositoryImpl implements EquipamentoRepository{
 
@@ -29,7 +29,7 @@ public class EquipamentoRepositoryImpl implements EquipamentoRepository{
 		
 		String sql = "insert into EQUIPAMENTO (DESCRICAO) values ( ? )";
 		try {
-			Connection connection = this.getConnection();
+			Connection connection = DbUtil.getConnection();
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, equipamento.getDescricao());
 			ps.executeUpdate();
@@ -50,7 +50,7 @@ public class EquipamentoRepositoryImpl implements EquipamentoRepository{
 		String sql = "update EQUIPAMENTO set descricao = ? "
 				+ " where id = ?";
 		try {
-			Connection connection = this.getConnection();
+			Connection connection = DbUtil.getConnection();
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, equipamento.getDescricao());
 			ps.setInt(2, equipamento.getId());
@@ -67,7 +67,7 @@ public class EquipamentoRepositoryImpl implements EquipamentoRepository{
 		// TODO Auto-generated method stub
 		String sql = "delete from EQUIPAMENTO where id = ?";
 		try {
-			Connection connection = this.getConnection();
+			Connection connection = DbUtil.getConnection();
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setInt(1, equipamento.getId());
 			ps.executeUpdate();
@@ -87,7 +87,7 @@ public class EquipamentoRepositoryImpl implements EquipamentoRepository{
 		// TODO Auto-generated method stub
 		String sql = "select * from EQUIPAMENTO";
 		try {
-			Connection connection = this.getConnection();
+			Connection connection = DbUtil.getConnection();
 			Statement st = connection.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			List<Equipamento> equipamentos = new ArrayList<>();
@@ -107,23 +107,11 @@ public class EquipamentoRepositoryImpl implements EquipamentoRepository{
 	}
 
 
-	private Connection getConnection() {
-		Connection connection = null;
-		try {
-			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/locadora", "postgres",
-					"postgres");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return connection;
-	}
-
 	@Override
 	public Equipamento findById(Integer id) {
 		String sql = "select * from EQUIPAMENTO where id = ?";
 		try {
-			Connection connection = this.getConnection();
+			Connection connection = DbUtil.getConnection();
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
@@ -144,7 +132,7 @@ public class EquipamentoRepositoryImpl implements EquipamentoRepository{
 	public Equipamento findByDescricao(String descricao) {
 		String sql = " select * from EQUIPAMENTO where DESCRICAO = ? "; 
 		try {
-			Connection connection = getConnection();
+			Connection connection = DbUtil.getConnection();
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, descricao);
 			ResultSet rs = ps.executeQuery();

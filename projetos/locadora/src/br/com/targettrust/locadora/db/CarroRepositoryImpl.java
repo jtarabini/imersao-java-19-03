@@ -1,7 +1,6 @@
 package br.com.targettrust.locadora.db;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +12,7 @@ import org.postgresql.util.PSQLException;
 import br.com.targettrust.locadora.entidades.Carro;
 import br.com.targettrust.locadora.exception.PlacaJaCadastradaException;
 import br.com.targettrust.locadora.exception.VeiculoNaoEncontradoException;
+import br.com.targettrust.locadora.util.DbUtil;
 
 public class CarroRepositoryImpl implements CarroRepository {
 
@@ -21,7 +21,7 @@ public class CarroRepositoryImpl implements CarroRepository {
 		try {
 			String insert = "INSERT INTO veiculo(" + "	placa, marca, modelo, cor, portas)"
 					+ "	VALUES (? , ?, ?, ?, ?)";
-			Connection connection = getConnection();
+			Connection connection = DbUtil.getConnection();
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setString(1, carro.getPlaca());
 			statement.setString(2, carro.getMarca());
@@ -46,7 +46,7 @@ public class CarroRepositoryImpl implements CarroRepository {
 		String sql = "UPDATE veiculo SET " + "  placa = ?, marca = ?, modelo = ?," + "  cor = ?, portas = ?, ano = ? "
 				+ " WHERE id = ? ";
 		try {
-			Connection connection = this.getConnection();
+			Connection connection = DbUtil.getConnection();
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, carro.getPlaca());
 			ps.setString(2, carro.getMarca());
@@ -71,7 +71,7 @@ public class CarroRepositoryImpl implements CarroRepository {
 		// TODO Auto-generated method stub
 		try {
 			String sql = "select * from veiculo where tipo = ?";
-			Connection connection = getConnection();
+			Connection connection = DbUtil.getConnection();
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setString(1, "CARRO");
 			ResultSet resultSet = statement.executeQuery(sql);
@@ -98,7 +98,7 @@ public class CarroRepositoryImpl implements CarroRepository {
 	public void delete(String placa) {
 		String sql = "delete from veiculo where placa = ?";
 		try {
-			Connection connection = getConnection();
+			Connection connection = DbUtil.getConnection();
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, placa);
 			int result = ps.executeUpdate();
@@ -115,7 +115,7 @@ public class CarroRepositoryImpl implements CarroRepository {
 	public void delete(Integer id) {
 		String sql = "delete from veiculo where id = ?";
 		try {
-			Connection connection = getConnection();
+			Connection connection = DbUtil.getConnection();
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setInt(1, id);
 			int result = ps.executeUpdate();
@@ -128,23 +128,11 @@ public class CarroRepositoryImpl implements CarroRepository {
 		}
 	}
 
-	private Connection getConnection() {
-		Connection connection = null;
-		try {
-			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/locadora", "postgres",
-					"postgres");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return connection;
-	}
-
 	@Override
 	public Carro findByPlaca(String placa) {
 		String sql = "select * from veiculo where placa = ?";
 		try {
-			Connection connection = getConnection();
+			Connection connection = DbUtil.getConnection();
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, placa);
 			ResultSet rs = ps.executeQuery();

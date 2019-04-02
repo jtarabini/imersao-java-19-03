@@ -13,17 +13,19 @@ import br.com.targettrust.locadora.exception.VeiculoNaoEncontradoException;
 
 public class CarroRepositoryTest {
 	
+	private static final int DEFAULT_ID = 9999;
+	private static final String PLACA_DEFAULT = "PPP-1234";
 	private CarroRepository carroRepository = new CarroRepositoryImpl();
 	
 	@Before
 	public void setup() {
-		carroRepository.delete("PPP-1234");
-		carroRepository.delete(9999);
+		carroRepository.delete(PLACA_DEFAULT);
+		carroRepository.delete(DEFAULT_ID);
 	}
 	
 	@After
 	public void cleanUp() {
-		carroRepository.delete("PPP-1234");		
+		carroRepository.delete(PLACA_DEFAULT);		
 	}
 	
 	@Test
@@ -34,7 +36,7 @@ public class CarroRepositoryTest {
 		carro.setCor("Prata");
 		carro.setMarca("Volkswagen");
 		carro.setModelo("Gol");
-		carro.setPlaca("PPP-1234");
+		carro.setPlaca(PLACA_DEFAULT);
 		carro.setPortas(4);
 		// Act
 		carroRepository.insertCarro(carro);
@@ -54,7 +56,7 @@ public class CarroRepositoryTest {
 		carro1.setCor("Prata");
 		carro1.setMarca("Volkswagen");
 		carro1.setModelo("Gol");
-		carro1.setPlaca("PPP-1234");
+		carro1.setPlaca(PLACA_DEFAULT);
 		carro1.setPortas(4);
 		carroRepository.insertCarro(carro1);
 		// Act
@@ -71,7 +73,7 @@ public class CarroRepositoryTest {
 		carro.setCor("Prata");
 		carro.setMarca("Volkswagen");
 		carro.setModelo("Gol");
-		carro.setPlaca("PPP-1234");
+		carro.setPlaca(PLACA_DEFAULT);
 		carro.setPortas(4);
 		carroRepository.insertCarro(carro);
 		carro.setId(carroRepository.findByPlaca(carro.getPlaca()).getId());
@@ -91,7 +93,7 @@ public class CarroRepositoryTest {
 		carro.setCor("Prata");
 		carro.setMarca("Volkswagen");
 		carro.setModelo("Gol");
-		carro.setPlaca("PPP-1234");
+		carro.setPlaca(PLACA_DEFAULT);
 		carro.setPortas(4);
 		carro.setId(9999);
 		// Act
