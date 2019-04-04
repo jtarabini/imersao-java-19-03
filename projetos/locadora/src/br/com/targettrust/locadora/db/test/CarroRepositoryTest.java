@@ -5,8 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.targettrust.locadora.db.CarroRepository;
-import br.com.targettrust.locadora.db.CarroRepositoryImpl;
+import br.com.targettrust.locadora.db.VeiculoRepository;
+import br.com.targettrust.locadora.db.VeiculoRepositoryImpl;
 import br.com.targettrust.locadora.entidades.Carro;
 import br.com.targettrust.locadora.exception.PlacaJaCadastradaException;
 import br.com.targettrust.locadora.exception.VeiculoNaoEncontradoException;
@@ -15,17 +15,17 @@ public class CarroRepositoryTest {
 	
 	private static final int DEFAULT_ID = 9999;
 	private static final String PLACA_DEFAULT = "PPP-1234";
-	private CarroRepository carroRepository = new CarroRepositoryImpl();
+	private VeiculoRepository veiculoRepository = new VeiculoRepositoryImpl();
 	
 	@Before
 	public void setup() {
-		carroRepository.delete(PLACA_DEFAULT);
-		carroRepository.delete(DEFAULT_ID);
+		veiculoRepository.delete(PLACA_DEFAULT);
+		veiculoRepository.delete(DEFAULT_ID);
 	}
 	
 	@After
 	public void cleanUp() {
-		carroRepository.delete(PLACA_DEFAULT);		
+		veiculoRepository.delete(PLACA_DEFAULT);		
 	}
 	
 	@Test
@@ -39,13 +39,13 @@ public class CarroRepositoryTest {
 		carro.setPlaca(PLACA_DEFAULT);
 		carro.setPortas(4);
 		// Act
-		carroRepository.insert(carro);
+		veiculoRepository.insert(carro);
 		// Assert
-		Carro carroDb = carroRepository.findByPlaca(carro.getPlaca());
+		Carro carroDb = (Carro) veiculoRepository.findByPlaca(carro.getPlaca());
 		Assert.assertNotNull(carroDb);
 		Assert.assertNotNull(carroDb.getId());
 		// Clean-up
-		carroRepository.delete(carro.getPlaca());
+		veiculoRepository.delete(carro.getPlaca());
 	}
 	
 	@Test(expected=PlacaJaCadastradaException.class)
@@ -58,9 +58,9 @@ public class CarroRepositoryTest {
 		carro1.setModelo("Gol");
 		carro1.setPlaca(PLACA_DEFAULT);
 		carro1.setPortas(4);
-		carroRepository.insert(carro1);
+		veiculoRepository.insert(carro1);
 		// Act
-		carroRepository.insert(carro1);
+		veiculoRepository.insert(carro1);
 		// Assert
 		
 	}
@@ -75,13 +75,13 @@ public class CarroRepositoryTest {
 		carro.setModelo("Gol");
 		carro.setPlaca(PLACA_DEFAULT);
 		carro.setPortas(4);
-		carroRepository.insert(carro);
-		carro.setId(carroRepository.findByPlaca(carro.getPlaca()).getId());
+		veiculoRepository.insert(carro);
+		carro.setId(veiculoRepository.findByPlaca(carro.getPlaca()).getId());
 		carro.setCor("Preto");
 		//Act
-		carroRepository.update(carro);
+		veiculoRepository.update(carro);
 		//Assert
-		Carro carroDb = carroRepository.findByPlaca(carro.getPlaca());
+		Carro carroDb = (Carro) veiculoRepository.findByPlaca(carro.getPlaca());
 		Assert.assertEquals(carroDb.getCor(), carro.getCor());		
 	}
 	
@@ -97,7 +97,7 @@ public class CarroRepositoryTest {
 		carro.setPortas(4);
 		carro.setId(9999);
 		// Act
-		carroRepository.update(carro);
+		veiculoRepository.update(carro);
 		// Assert
 		
 	}
