@@ -8,11 +8,11 @@ import br.com.targettrust.locadora.entidades.Carro;
 
 public interface CarroRepository {
 	
-	void insertCarro(Carro carro);
+	void insert(Carro carro);
 	
-	void updateCarro(Carro carro);
+	void update(Carro carro);
 	
-	List<Carro> listCarros();
+	List<Carro> list();
 	
 	void delete(String placa);
 

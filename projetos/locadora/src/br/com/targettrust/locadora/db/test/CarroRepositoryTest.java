@@ -39,7 +39,7 @@ public class CarroRepositoryTest {
 		carro.setPlaca(PLACA_DEFAULT);
 		carro.setPortas(4);
 		// Act
-		carroRepository.insertCarro(carro);
+		carroRepository.insert(carro);
 		// Assert
 		Carro carroDb = carroRepository.findByPlaca(carro.getPlaca());
 		Assert.assertNotNull(carroDb);
@@ -58,9 +58,9 @@ public class CarroRepositoryTest {
 		carro1.setModelo("Gol");
 		carro1.setPlaca(PLACA_DEFAULT);
 		carro1.setPortas(4);
-		carroRepository.insertCarro(carro1);
+		carroRepository.insert(carro1);
 		// Act
-		carroRepository.insertCarro(carro1);
+		carroRepository.insert(carro1);
 		// Assert
 		
 	}
@@ -75,11 +75,11 @@ public class CarroRepositoryTest {
 		carro.setModelo("Gol");
 		carro.setPlaca(PLACA_DEFAULT);
 		carro.setPortas(4);
-		carroRepository.insertCarro(carro);
+		carroRepository.insert(carro);
 		carro.setId(carroRepository.findByPlaca(carro.getPlaca()).getId());
 		carro.setCor("Preto");
 		//Act
-		carroRepository.updateCarro(carro);
+		carroRepository.update(carro);
 		//Assert
 		Carro carroDb = carroRepository.findByPlaca(carro.getPlaca());
 		Assert.assertEquals(carroDb.getCor(), carro.getCor());		
@@ -97,7 +97,7 @@ public class CarroRepositoryTest {
 		carro.setPortas(4);
 		carro.setId(9999);
 		// Act
-		carroRepository.updateCarro(carro);
+		carroRepository.update(carro);
 		// Assert
 		
 	}
