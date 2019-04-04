@@ -10,7 +10,7 @@ public class CarroOutput {
 	
 	public static void main(String[] args) {
 		CarroRepository carroRepository = new CarroRepositoryImpl();
-		List<Carro> carros = carroRepository.listCarros();
+		List<Carro> carros = carroRepository.list();
 		System.out.println(carros.size());
 	}
 
