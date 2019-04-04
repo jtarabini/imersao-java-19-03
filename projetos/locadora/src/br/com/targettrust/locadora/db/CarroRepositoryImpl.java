@@ -17,7 +17,7 @@ import br.com.targettrust.locadora.util.DbUtil;
 public class CarroRepositoryImpl implements CarroRepository {
 
 	@Override
-	public void insertCarro(Carro carro) {
+	public void insert(Carro carro) {
 		try {
 			String insert = "INSERT INTO veiculo(" + "	placa, marca, modelo, cor, portas)"
 					+ "	VALUES (? , ?, ?, ?, ?)";
@@ -41,7 +41,7 @@ public class CarroRepositoryImpl implements CarroRepository {
 	}
 
 	@Override
-	public void updateCarro(Carro carro) {
+	public void update(Carro carro) {
 		// TODO Auto-generated method stub
 		String sql = "UPDATE veiculo SET " + "  placa = ?, marca = ?, modelo = ?," + "  cor = ?, portas = ?, ano = ? "
 				+ " WHERE id = ? ";
@@ -67,7 +67,7 @@ public class CarroRepositoryImpl implements CarroRepository {
 	}
 
 	@Override
-	public List<Carro> listCarros() {
+	public List<Carro> list() {
 		// TODO Auto-generated method stub
 		try {
 			String sql = "select * from veiculo where tipo = ?";
