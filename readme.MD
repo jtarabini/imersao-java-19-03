@@ -13,3 +13,6 @@ Este repositório contém o conteúdo passado durante as aulas e exercícios pro
 * Semana 3  
     * [26/03/2019](./aulas/2019_03_26.MD)  
     * [28/03/2019](./aulas/2019_03_28.MD)
+* Semana 4  
+    * [02/04/2019](./aulas/2019_04_02.MD)  
+    * [04/04/2019](./aulas/2019_04_04.MD)
