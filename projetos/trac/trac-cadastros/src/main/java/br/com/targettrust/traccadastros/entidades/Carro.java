@@ -18,7 +18,4 @@ public class Carro extends Veiculo {
 	public void setPortas(Integer portas) {
 		this.portas = portas;
 	}
-	
-	
-
 }
