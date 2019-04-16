@@ -1,7 +1,8 @@
 # Configuração inicial do spring
 
 Uma das conhecidas desvantagens do spring é a complexidade de sua  configuração inicial em vista da infinidade de módulos e bibliotecas presentes. Para facilitar a "*quickstart?*" de um projeto podemos utilizar o *[spring initializr](https://start.spring.io) spring initializr*, conforme mostra a figura abaixo:
-![Spring initializr](../imagens/Screenshot from 2019-04-10 21-38-06.png  "Spring initializr")
+ ![Spring initializr](../imagens/Spring_initializr.png  "Spring initializr")
+
 
 Nosso primeiro exemplo será demonstrar como podemos manipular dados no banco utilizando a biblioteca spring-data-jpa.  O banco a ser utilizado é o postgres portanto o driver jdbc deve ser incluído em nossas bibliotecas
 ```xml
