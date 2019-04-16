@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue("CARRO")
 public class Carro extends Veiculo {
 	
-	@Column
+	@Column(name="vcl_portas", length=1)
 	private Integer portas;
 
 	public Integer getPortas() {

@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
-Built-By: thiago
-Build-Jdk: 11.0.2
 Implementation-Title: trac-cadastros
 Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: instrutor
 Implementation-Vendor-Id: br.com.targettrust
-Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
- -starter-parent/trac-cadastros
+Build-Jdk: 1.8.0_161
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/trac-cadastros
 Created-By: Maven Integration for Eclipse
 
