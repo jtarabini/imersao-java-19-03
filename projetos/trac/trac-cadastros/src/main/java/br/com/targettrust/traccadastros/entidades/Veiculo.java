@@ -10,25 +10,27 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="tb_veiculo")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo")
-public class Veiculo extends Entidade {
+public abstract class Veiculo extends Entidade {
 
-	@Column
+	@Column(name="vcl_placa", length=8, unique=true)
 	private String placa;
-	@Column
+	@Column(name="vcl_ano", length=4)
 	private Integer ano;
-	@Column
+	@Column(name="vcl_cor", length=20)
 	private String cor;
-	@Column
+	@Column(name="vcl_marca", length=10)
 	private String marca;
-	@Column
+	@Column(name="vcl_modelo", length=20)
 	private String modelo;
 
 	@ManyToMany
-	@JoinTable(name = "rl_carro_equipamento", 
+	@JoinTable(name = "rl_veiculo_equipamento", 
 		inverseJoinColumns = {@JoinColumn(name = "id_equipamento", referencedColumnName = "id") }, 
 		joinColumns = {@JoinColumn(name = "id_veiculo", referencedColumnName = "id") } )
 	private Set<Equipamento> equipamentos;
