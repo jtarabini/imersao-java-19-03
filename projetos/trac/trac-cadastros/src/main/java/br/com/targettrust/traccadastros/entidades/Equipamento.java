@@ -5,7 +5,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.Version;
+
 
 @Entity(name="tb_equipamento")
 public class Equipamento extends Entidade {
@@ -15,10 +15,6 @@ public class Equipamento extends Entidade {
 	
 	@ManyToMany(mappedBy="equipamentos")
 	private Set<Veiculo> veiculos;
-	
-	@Version
-	@Column(name="eqp_versao")
-	private Integer versao;
 	
 	public String getDescricao() {
 		return descricao;
