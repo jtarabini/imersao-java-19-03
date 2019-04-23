@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 
 import br.com.targettrust.traccadastros.entidades.Funcionario;
 import br.com.targettrust.traccadastros.entidades.Locacao;
+import br.com.targettrust.traccadastros.entidades.Reserva;
 
 public interface LocacaoRepository 
 	extends JpaRepository<Locacao, Long>{
@@ -26,6 +27,17 @@ public interface LocacaoRepository
 			@Param("dataInicial") Date dataInicial,
 			@Param("dataFinal") Date dataFinal);
 
+
+	@Query("  from Locacao locacao "+ 
+	       " where locacao.veiculo.placa = :placa "
+	       + " and ( :dataInicial between locacao.dataInicial and locacao.dataFinal "
+	       + "       OR"
+	       + "       :dataFinal between locacao.dataInicial and locacao.dataFinal )")
+	List<Locacao> findByPlacaVeiculo(
+			@Param("placa") String placa, 
+			@Param("dataInicial") Date dataInicial, 
+			@Param("dataFinal") Date dataFinal);
+
 	@Transactional
 	@Modifying
 	@Query(" delete from Locacao locacao " +
@@ -34,5 +46,6 @@ public interface LocacaoRepository
 	       "         where l.veiculo.placa = :placa " +
 		   "       )")
 	void deleteByVeiculo(@Param("placa") String placa);
+	
 
 }

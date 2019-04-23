@@ -22,6 +22,7 @@ import br.com.targettrust.traccadastros.entidades.Locacao;
 import br.com.targettrust.traccadastros.repositorio.LocacaoRepository;
 import br.com.targettrust.traccadastros.repositorio.UsuarioRepository;
 import br.com.targettrust.traccadastros.repositorio.VeiculoRepository;
+import br.com.targettrust.traccadastros.util.DateUtil;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -87,35 +88,25 @@ public class LocacaoRepositoryTest {
 		Cliente cliente = createCliente();
 		Carro carro = createCarro();
 		createLocacao(funcionario, cliente, carro, 
-				createDate("01/01/2019 14:00"), 
-				createDate("03/01/2019 12:00"));
+				DateUtil.createDate("01/01/2019 14:00"), 
+				DateUtil.createDate("03/01/2019 12:00"));
 		createLocacao(funcionario, cliente, carro, 
-				createDate("05/01/2019 14:00"), 
-				createDate("06/01/2019 12:00"));
+				DateUtil.createDate("05/01/2019 14:00"), 
+				DateUtil.createDate("06/01/2019 12:00"));
 		createLocacao(funcionario, cliente, carro, 
-				createDate("05/02/2019 14:00"), 
-				createDate("06/02/2019 12:00"));
+				DateUtil.createDate("05/02/2019 14:00"), 
+				DateUtil.createDate("06/02/2019 12:00"));
 		//Act
 		List<Locacao> locacoes = locacaoRepository
 				.findByFuncionario(funcionario, 
-						createDate("01/01/2019 00:00"), 
-						createDate("31/01/2019 23:59"));
+						DateUtil.createDate("01/01/2019 00:00"), 
+						DateUtil.createDate("31/01/2019 23:59"));
 		//Assert TODO
 		Assert.assertThat(locacoes, Matchers.notNullValue());
 		Assert.assertThat(locacoes.size(), Matchers.equalTo(2));
 		
 	}
-
-	private Date createDate(String data) {
-		try {
-			String pattern = "dd/MM/yyyy HH:mm";
-			DateFormat formatter = new SimpleDateFormat(pattern);
-			return formatter.parse(data);
-		}catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+	
 
 	private void createLocacao(Funcionario funcionario, Cliente cliente, Carro carro, Date dataInicial,
 			Date dataFinal) {
