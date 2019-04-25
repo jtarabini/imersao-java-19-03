@@ -5,6 +5,7 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 
 @Entity
 @Table(name="tb_cliente")
@@ -19,6 +20,10 @@ public class Cliente extends Usuario {
 	
 	@Column(name="cli_endereco")
 	private String endereco;
+	
+	@Email
+	@Column(name="cli_email")
+	private String email;
 
 	public String getEndereco() {
 		return endereco;
