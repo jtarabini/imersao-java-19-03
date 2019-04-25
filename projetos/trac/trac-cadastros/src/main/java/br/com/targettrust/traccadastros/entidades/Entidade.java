@@ -1,5 +1,6 @@
 package br.com.targettrust.traccadastros.entidades;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +17,10 @@ public class Entidade {
 	@Version
 	private Integer versao;
 
+	@Version
+	@Column(name="versao")
+	private Integer versao;
+	
 	public Long getId() {
 		return id;
 	}
