@@ -1,14 +1,19 @@
 package br.com.targettrust.traccadastros.repositorios;
 
 import java.util.HashSet;
+import java.util.Set;
+
+import javax.validation.ConstraintViolationException;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.TransactionSystemException;
 
 import br.com.targettrust.traccadastros.entidades.Carro;
 import br.com.targettrust.traccadastros.entidades.Equipamento;
@@ -45,6 +50,30 @@ public class CarroRepositoryTest {
 		repository.save(carro);	
 	}
 	
+	@Test(expected=TransactionSystemException.class)
+	public void salvaPortasNull() {
+		Carro carro = new Carro();
+		carro.setAno(2012);
+		carro.setCor("Prata");
+		carro.setMarca("Mercedes");
+		carro.setModelo("C180");
+		carro.setPortas(null);
+		carro.setPlaca(PLACA_DEFAULT);
+		repository.save(carro);	
+	}
+	
+	@Test
+	public void salvaPortasNegativa() {
+		Carro carro = new Carro();
+		carro.setAno(2012);
+		carro.setCor("Prata");
+		carro.setMarca("Mercedes");
+		carro.setModelo("C180");
+		carro.setPortas(-1);
+		carro.setPlaca(PLACA_DEFAULT);
+		repository.save(carro);	
+	}
+	
 	@Test
 	public void insertComEquipamentos() {
 		Equipamento equipamento = new Equipamento();
@@ -61,7 +90,35 @@ public class CarroRepositoryTest {
 		
 		dbCarro.setEquipamentos(new HashSet<>());
 		dbCarro.getEquipamentos().add(dbEquipamento);	
+		this.repository.save(dbCarro);		
+	}
+	
+	@Test
+	@Ignore
+	public void insertCarrosComEquipamentos() {
+		Set<Equipamento> equipamentos = new HashSet<>();
+		for(int i=0; i< 30; i++) {
+			Equipamento equipamento = new Equipamento();
+			equipamento.setDescricao(EQUIPAMENTO_DEFAULT+i);
+			Equipamento dbEquipamento = equipamentoRepository.save(equipamento);
+			equipamentos.add(dbEquipamento);
+		}
+		Carro carro = new Carro();
+		carro.setAno(2015);
+		carro.setCor("Branco");
+		carro.setMarca("Ford");
+		carro.setModelo("Fusion");
+		carro.setPlaca(PLACA_DEFAULT);
+		carro.setPortas(4);
+		Carro dbCarro = this.repository.save(carro);
+		
+		dbCarro.setEquipamentos(equipamentos);	
 		this.repository.save(dbCarro);
+		
+		dbCarro = (Carro) this.repository.findVeiculoComEquipamentosById(dbCarro.getId());
+		System.out.println(dbCarro);
+		dbCarro.getEquipamentos();
+		
 		
 	}
 

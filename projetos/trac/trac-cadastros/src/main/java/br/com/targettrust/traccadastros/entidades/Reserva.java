@@ -2,6 +2,8 @@ package br.com.targettrust.traccadastros.entidades;
 
 import java.util.Date;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -12,6 +14,9 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="tb_reserva")
+@AttributeOverrides({
+	@AttributeOverride(name="versao", column=@Column(name="rsv_versao"))
+})
 public class Reserva extends Entidade{
 	
 	@ManyToOne

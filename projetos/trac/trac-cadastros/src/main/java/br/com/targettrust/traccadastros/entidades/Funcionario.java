@@ -11,7 +11,8 @@ import javax.persistence.Table;
 @AttributeOverrides({
 	@AttributeOverride(name="login", column = @Column(name="fnc_login")),
 	@AttributeOverride(name="senha", column = @Column(name="fnc_senha")),
-	@AttributeOverride(name="nome", column = @Column(name="fnc_nome"))
+	@AttributeOverride(name="nome", column = @Column(name="fnc_nome")),
+	@AttributeOverride(name="versao", column=@Column(name="fnc_versao"))
 })
 public class Funcionario extends Usuario{
 	
