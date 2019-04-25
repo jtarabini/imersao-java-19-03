@@ -13,6 +13,9 @@ public class Entidade {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	
+	@Version
+	private Integer versao;
 
 	@Version
 	@Column(name="versao")
@@ -25,4 +28,14 @@ public class Entidade {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public Integer getVersao() {
+		return versao;
+	}
+
+	public void setVersao(Integer versao) {
+		this.versao = versao;
+	}
+	
+	
 }

@@ -11,7 +11,9 @@ import javax.persistence.Table;
 @AttributeOverrides({
 	@AttributeOverride(name="login", column = @Column(name="cli_login")),
 	@AttributeOverride(name="senha", column = @Column(name="cli_senha")),
-	@AttributeOverride(name="nome", column = @Column(name="cli_nome"))
+	@AttributeOverride(name="nome", column = @Column(name="cli_nome")),
+	@AttributeOverride(name="versao", column=@Column(name="cli_versao"))
+
 })
 public class Cliente extends Usuario {
 	

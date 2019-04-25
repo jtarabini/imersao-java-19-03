@@ -2,6 +2,8 @@ package br.com.targettrust.traccadastros.entidades;
 
 import java.util.Set;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -16,6 +18,9 @@ import javax.persistence.Table;
 @Table(name="tb_veiculo")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo")
+@AttributeOverrides({
+	@AttributeOverride(name="versao", column=@Column(name="vcl_versao"))
+})
 public abstract class Veiculo extends Entidade {
 
 	@Column(name="vcl_placa", length=8, unique=true)
