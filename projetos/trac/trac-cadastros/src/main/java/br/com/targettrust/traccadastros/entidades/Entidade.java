@@ -13,9 +13,6 @@ public class Entidade {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
-	@Version
-	private Integer versao;
 
 	@Version
 	@Column(name="versao")
