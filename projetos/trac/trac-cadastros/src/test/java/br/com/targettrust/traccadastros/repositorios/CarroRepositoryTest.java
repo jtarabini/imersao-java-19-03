@@ -23,6 +23,8 @@ import br.com.targettrust.traccadastros.repositorio.VeiculoRepository;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CarroRepositoryTest {
+	private static final String PLACA_INVALIDA_MAXIMA_DEFAULT = "NULL-0000";
+	private static final String PLACA_INVALIDA_MINIMA_DEFAULT = "NUL0000";
 	private static final String EQUIPAMENTO_DEFAULT = "DVD";
 	private static final String PLACA_DEFAULT = "IST-8789";
 	@Autowired
@@ -35,7 +37,33 @@ public class CarroRepositoryTest {
 	@After
 	public void setup() {
 		repository.deleteByPlaca(PLACA_DEFAULT);
+		repository.deleteByPlaca(PLACA_INVALIDA_MINIMA_DEFAULT);
+		repository.deleteByPlaca(PLACA_INVALIDA_MAXIMA_DEFAULT);
 		equipamentoRepository.deleteByDescricao(EQUIPAMENTO_DEFAULT);
+	}
+	
+	@Test(expected=TransactionSystemException.class)
+	public void testaPlacaInvalidaMinima() {
+		Carro carro = new Carro();
+		carro.setAno(2012);
+		carro.setCor("Prata");
+		carro.setMarca("Mercedes");
+		carro.setModelo("C180");
+		carro.setPlaca(PLACA_INVALIDA_MINIMA_DEFAULT);
+		carro.setPortas(4);
+		repository.save(carro);	
+	}
+
+	@Test(expected=TransactionSystemException.class)
+	public void testaPlacaInvalidaMaxima() {
+		Carro carro = new Carro();
+		carro.setAno(2012);
+		carro.setCor("Prata");
+		carro.setMarca("Mercedes");
+		carro.setModelo("C180");
+		carro.setPlaca(PLACA_INVALIDA_MAXIMA_DEFAULT);
+		carro.setPortas(4);
+		repository.save(carro);	
 	}
 	
 	@Test
@@ -119,8 +147,6 @@ public class CarroRepositoryTest {
 		dbCarro = (Carro) this.repository.findVeiculoComEquipamentosById(dbCarro.getId());
 		System.out.println(dbCarro);
 		dbCarro.getEquipamentos();
-		
-		
 	}
 
 }
