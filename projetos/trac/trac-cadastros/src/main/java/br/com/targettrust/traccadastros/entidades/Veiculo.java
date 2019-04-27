@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="tb_veiculo")
@@ -26,8 +27,7 @@ import javax.validation.constraints.Min;
 public abstract class Veiculo extends Entidade {
 
 	@Column(name="vcl_placa", length=8, unique=true)
-	@Min(8)
-	@Max(8)
+	@Size(min=8, max=8)
 	private String placa;
 	@Column(name="vcl_ano", length=4)
 	private Integer ano;
