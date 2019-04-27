@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.PastOrPresent;
 
 @Entity
 @Table(name="tb_locacao")
@@ -33,6 +34,7 @@ public class Locacao extends Entidade{
 	
 	@Column(name="dt_inicio")
 	@Temporal(TemporalType.TIMESTAMP)
+	@PastOrPresent
 	private Date dataInicial;
 	
 	@Column(name="dt_fim")

@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.TransactionSystemException;
 
 import br.com.targettrust.traccadastros.entidades.Carro;
 import br.com.targettrust.traccadastros.entidades.Cliente;
@@ -43,6 +44,16 @@ public class LocacaoRepositoryTest {
 		veiculoRepository.deleteByPlaca(PLACA_DEFAULT);
 	}
 
+	@Test(expected=TransactionSystemException.class)
+	public void testaDataInicialLocacaoInvalidaNoFuturo() {
+		Funcionario funcionario = createFuncionario();
+		Cliente cliente = createCliente();
+		Carro carro = createCarro();
+		createLocacao(funcionario, cliente, carro, 
+				DateUtil.createDate("01/09/2019 14:00"), 
+				DateUtil.createDate("03/01/2019 12:00"));		
+	}
+	
 	@Test
 	public void comDuasLocacoesNoMesDeveRetornarDuasNaConsulta(){
 		//Arrange

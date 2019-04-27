@@ -49,7 +49,7 @@ public class ReservaRepositoryTest {
 	}
 	
 	@Test(expected=TransactionSystemException.class)
-	public void testaDataInicioReservaInvalida() {
+	public void testaDataInicioReservaInvalidaNoPassado() {
 		Carro carro = createCarro();
 		Reserva reserva = createReserva(
 				carro, 
@@ -58,7 +58,7 @@ public class ReservaRepositoryTest {
 	}
 
 	@Test(expected=TransactionSystemException.class)
-	public void testaDataFinalReservaInvalida() {
+	public void testaDataFinalReservaInvalidaNoPassado() {
 		Carro carro = createCarro();
 		Reserva reserva = createReserva(
 				carro, 
