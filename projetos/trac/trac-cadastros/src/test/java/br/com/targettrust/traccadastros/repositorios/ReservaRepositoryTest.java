@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.TransactionSystemException;
 
 import br.com.targettrust.traccadastros.entidades.Carro;
 import br.com.targettrust.traccadastros.entidades.Cliente;
@@ -47,6 +48,23 @@ public class ReservaRepositoryTest {
 			.deleteFuncionarioByLogin(ADMINISTRADOR_LOGIN);
 	}
 	
+	@Test(expected=TransactionSystemException.class)
+	public void testaDataInicioReservaInvalida() {
+		Carro carro = createCarro();
+		Reserva reserva = createReserva(
+				carro, 
+				DateUtil.createDate("01/01/2019 12:00"),
+				DateUtil.createDate("10/05/2019 14:00"));
+	}
+
+	@Test(expected=TransactionSystemException.class)
+	public void testaDataFinalReservaInvalida() {
+		Carro carro = createCarro();
+		Reserva reserva = createReserva(
+				carro, 
+				DateUtil.createDate("01/05/2019 12:00"),
+				DateUtil.createDate("01/01/2019 14:00"));
+	}
 	@Test
 	public void carroSemReservaDeveRetornarVazio() {
 		// Arrange
