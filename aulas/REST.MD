@@ -134,12 +134,12 @@ Havia um pressuposto implícito na discussão dos primeiros dois princípios: a 
 Ele sabe o que fazer com ela, porque todos os recursos possuem a mesma interface, e o mesmo conjunto de métodos (ou operações, se preferir). O HTTP chama esse verbo, e além dos dois que todo mundo conhece (o GET e o POST), o conjunto de métodos padrão inclui PUT, DELETE, HEAD e OPTIONS. O significado de cada um desses métodos é definido na especificação do HTTP, juntamente com algumas garantias sobre o seus comportamentos. 
 
 As operações mais comuns em recursos são as seguintes:
-|   | Operação  | Descrição  | *HTTP Verb*  |   
-|---|---|---|---|---|
-| **C**  | *Create*  | Criar uma nova instância do recurso  | POST  |   
-| **R**  | *Retrieve*  | Pesquisar dados em um formato conveniente  | GET  |   
-| **U**  | *Update*  | Atualizar dados | UPDATE  |   
-| **D**  | *Delete*  | Deletar um recurso  |  DELETE  |   
+| Inicial **CRUD** |  Operação  |                 Descrição                 | *HTTP Verb* |
+|:----------------:|:----------:|:-----------------------------------------:|:-----------:|
+|       **C**      |  *Create*  | Criar uma nova instância do recurso       |     POST    |
+|       **R**      | *Retrieve* | Pesquisar dados em um formato conveniente |     GET     |
+|       **U**      |   *Update* | Atualizar dados                           |    UPDATE   |
+|       **D**      |  *Delete*  | Deletar um recurso                        |    DELETE   | 
 
 
 ### 4. Trabalhe com os códigos de retorno *default*
