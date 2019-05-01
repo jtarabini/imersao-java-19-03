@@ -25,4 +25,7 @@ Este repositório contém o conteúdo passado durante as aulas e exercícios pro
 * Semana 7
     * [23/04/2019](./aulas/2019_04_23.MD)  
     * [25/04/2019](./aulas/2019_04_25.MD)  
+* Semana 8
+    * [02/05/2019](./aulas/2019_05_02.MD)  
+
     
