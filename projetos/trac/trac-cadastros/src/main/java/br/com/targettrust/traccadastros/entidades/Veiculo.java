@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
 public abstract class Veiculo extends Entidade {
 
 	@Column(name="vcl_placa", length=8, unique=true)
-	@Max(8)
+	@Size(min=8, max=8)
 	private String placa;
 	@Column(name="vcl_ano", length=4)
 	private Integer ano;
