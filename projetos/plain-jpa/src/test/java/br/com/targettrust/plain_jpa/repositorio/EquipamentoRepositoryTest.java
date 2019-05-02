@@ -1,5 +1,8 @@
 package br.com.targettrust.plain_jpa.repositorio;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,13 +14,23 @@ public class EquipamentoRepositoryTest {
 	
 	private static final String DESCRICAO_DEFAULT = "Direção elétrica";
 	private static final String DESCRICAO_ALTERADA = "Direção hidráulica";
-	private EquipamentoRepository equipamentoRepository = new EquipamentoRepository();
+	private EquipamentoRepository equipamentoRepository;
+	private EntityManager entityManager;
+	
+	public EquipamentoRepositoryTest() {
+		entityManager = Persistence
+				.createEntityManagerFactory("tracPU")
+				.createEntityManager();
+		equipamentoRepository = new EquipamentoRepository(entityManager);
+	}
 
 	@Before
 	@After
 	public void setup() {
+		entityManager.getTransaction().begin();
 		equipamentoRepository.deleteByDescricao(DESCRICAO_DEFAULT);
 		equipamentoRepository.deleteByDescricao(DESCRICAO_ALTERADA);
+		entityManager.getTransaction().commit();
 	}
 
 	
@@ -50,9 +63,11 @@ public class EquipamentoRepositoryTest {
 	*/
 	
 	private Equipamento createEquipamento() {
+		entityManager.getTransaction().begin();
 		Equipamento equipamento = new Equipamento();
 		equipamento.setDescricao(DESCRICAO_DEFAULT);
-		return equipamentoRepository.save(equipamento);		
+		entityManager.getTransaction().commit();	
+		return equipamentoRepository.save(equipamento);	
 	}
 
 }

@@ -10,27 +10,28 @@ public class EquipamentoRepository {
 	
 	private EntityManager entityManager;
 	
-	public EquipamentoRepository() {
-		entityManager = Persistence
-				.createEntityManagerFactory("tracPU")
-				.createEntityManager();
+	public EquipamentoRepository(EntityManager entityManager) {
+		this.entityManager = entityManager;
 	}
 	
 	public Equipamento save(Equipamento equipamento) {
-		entityManager.getTransaction().begin();
 		entityManager.persist(equipamento);
-		entityManager.getTransaction().commit();
 		return equipamento;
 	}
 
 	public void deleteByDescricao(String descricao) {
 		String deleteQuery = "delete from Equipamento equipamento"
 				+ " where equipamento.descricao = :descricao";
-		entityManager.getTransaction().begin();
 		Query query = entityManager.createQuery(deleteQuery);
 		query.setParameter("descricao", descricao);
 		query.executeUpdate();
-		entityManager.getTransaction().commit();
+	}
+
+	public Equipamento findByDescricao(String descricao) {
+		String jpql = "from Equipamento e where e.descricao= :descricao";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("descricao", descricao);
+		return (Equipamento) query.getSingleResult();
 	}
 
 }
