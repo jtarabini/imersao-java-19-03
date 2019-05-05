@@ -3,9 +3,9 @@ package br.com.targettrust.traccadastros.repositorios;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.validation.ConstraintViolationException;
-
+import org.hamcrest.Matchers;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -15,112 +15,116 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.TransactionSystemException;
 
+import br.com.targettrust.traccadastros.entidades.Acessorio;
 import br.com.targettrust.traccadastros.entidades.Carro;
-import br.com.targettrust.traccadastros.entidades.Equipamento;
-import br.com.targettrust.traccadastros.repositorio.EquipamentoRepository;
+import br.com.targettrust.traccadastros.entidades.Marca;
+import br.com.targettrust.traccadastros.entidades.Modelo;
+import br.com.targettrust.traccadastros.repositorio.AcessorioRepository;
+import br.com.targettrust.traccadastros.repositorio.MarcaRepository;
+import br.com.targettrust.traccadastros.repositorio.ModeloRepository;
 import br.com.targettrust.traccadastros.repositorio.VeiculoRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CarroRepositoryTest {
-	private static final String EQUIPAMENTO_DEFAULT = "DVD";
+	private static final int DEFAULT_ANO = 2012;
+	private static final String DEFAULT_MODELO = "C180";
+	private static final String DEFAULT_MARCA = "Mercedes";
+	private static final String ACESSORIO_DEFAULT = "DVD";
 	private static final String PLACA_DEFAULT = "IST-8789";
 	@Autowired
 	private VeiculoRepository repository;
 	// Necessário para injetar uma instância de repositório
 	@Autowired
-	private EquipamentoRepository equipamentoRepository;
+	private AcessorioRepository acessorioRepository;
+	@Autowired
+	private ModeloRepository modeloRepository;
+	@Autowired
+	private MarcaRepository marcaRepository;
 	
 	@Before
 	@After
 	public void setup() {
 		repository.deleteByPlaca(PLACA_DEFAULT);
-		equipamentoRepository.deleteByDescricao(EQUIPAMENTO_DEFAULT);
+		acessorioRepository.deleteByDescricao(PLACA_DEFAULT);
+		modeloRepository.deleteByNome(DEFAULT_MODELO);
+		marcaRepository.deleteByNome(DEFAULT_MARCA);
 	}
 	
 	@Test
 	public void basicInsertTest() {
-		Carro carro = new Carro();
-		carro.setAno(2012);
-		carro.setCor("Prata");
-		carro.setMarca("Mercedes");
-		carro.setModelo("C180");
-		carro.setPlaca(PLACA_DEFAULT);
+		Carro carro = createCarroInstance();
 		carro.setPortas(4);
 		repository.save(carro);	
 	}
-	
+
 	@Test(expected=TransactionSystemException.class)
 	public void salvaPortasNull() {
-		Carro carro = new Carro();
-		carro.setAno(2012);
-		carro.setCor("Prata");
-		carro.setMarca("Mercedes");
-		carro.setModelo("C180");
+		Carro carro = createCarroInstance();
 		carro.setPortas(null);
-		carro.setPlaca(PLACA_DEFAULT);
 		repository.save(carro);	
 	}
 	
 	@Test
 	@Ignore
 	public void salvaPortasNegativa() {
-		Carro carro = new Carro();
-		carro.setAno(2012);
-		carro.setCor("Prata");
-		carro.setMarca("Mercedes");
-		carro.setModelo("C180");
+		Carro carro = createCarroInstance();
 		carro.setPortas(-1);
-		carro.setPlaca(PLACA_DEFAULT);
 		repository.save(carro);	
 	}
 	
 	@Test
-	public void insertComEquipamentos() {
-		Equipamento equipamento = new Equipamento();
-		equipamento.setDescricao(EQUIPAMENTO_DEFAULT);
-		Equipamento dbEquipamento = equipamentoRepository.save(equipamento);
-		Carro carro = new Carro();
-		carro.setAno(2015);
-		carro.setCor("Branco");
-		carro.setMarca("Ford");
-		carro.setModelo("Fusion");
-		carro.setPlaca(PLACA_DEFAULT);
-		carro.setPortas(4);
+	public void insertComAcessorios() {
+		Acessorio acessorio = new Acessorio();
+		acessorio.setDescricao(ACESSORIO_DEFAULT);
+		Acessorio dbAcessorio = acessorioRepository.save(acessorio);
+		Carro carro = this.createCarroInstance();
 		Carro dbCarro = this.repository.save(carro);
 		
-		dbCarro.setEquipamentos(new HashSet<>());
-		dbCarro.getEquipamentos().add(dbEquipamento);	
+		dbCarro.setAcessorios(new HashSet<>());
+		dbCarro.getAcessorios().add(dbAcessorio);	
 		this.repository.save(dbCarro);		
 	}
 	
 	@Test
 	@Ignore
-	public void insertCarrosComEquipamentos() {
-		Set<Equipamento> equipamentos = new HashSet<>();
+	public void insertCarrosComAcessorios() {
+		Set<Acessorio> acessorios = new HashSet<>();
 		for(int i=0; i< 30; i++) {
-			Equipamento equipamento = new Equipamento();
-			equipamento.setDescricao(EQUIPAMENTO_DEFAULT+i);
-			Equipamento dbEquipamento = equipamentoRepository.save(equipamento);
-			equipamentos.add(dbEquipamento);
+			Acessorio acessorio = new Acessorio();
+			acessorio.setDescricao(ACESSORIO_DEFAULT+i);
+			Acessorio dbAcessorio = acessorioRepository.save(acessorio);
+			acessorios.add(dbAcessorio);
 		}
-		Carro carro = new Carro();
-		carro.setAno(2015);
-		carro.setCor("Branco");
-		carro.setMarca("Ford");
-		carro.setModelo("Fusion");
-		carro.setPlaca(PLACA_DEFAULT);
-		carro.setPortas(4);
+		Carro carro = this.createCarroInstance();
 		Carro dbCarro = this.repository.save(carro);
 		
-		dbCarro.setEquipamentos(equipamentos);	
+		dbCarro.setAcessorios(acessorios);	
 		this.repository.save(dbCarro);
 		
-		dbCarro = (Carro) this.repository.findVeiculoComEquipamentosById(dbCarro.getId());
-		System.out.println(dbCarro);
-		dbCarro.getEquipamentos();
-		
-		
+		dbCarro = (Carro) this.repository.findVeiculoComAcessoriosById(dbCarro.getId());
+		Assert.assertThat(dbCarro.getAcessorios(), Matchers.not(Matchers.empty()));	
+	}
+
+	private Carro createCarroInstance() {
+		Carro carro = new Carro();
+		carro.setAnoFabricacao(DEFAULT_ANO);
+		carro.setCor("Prata");
+		carro.setModelo(this.createMarcaAndModelo(DEFAULT_MARCA, DEFAULT_MODELO, DEFAULT_ANO));
+		carro.setPlaca(PLACA_DEFAULT);
+		carro.setPortas(4);
+		return carro;
+	}
+	
+	private Modelo createMarcaAndModelo(String marca, String modelo, int ano) {
+		Marca marcaEntity = new Marca();
+		marcaEntity.setNome(marca);
+		this.marcaRepository.save(marcaEntity);
+		Modelo modeloEntity = new Modelo();
+		modeloEntity.setAno(ano);
+		modeloEntity.setMarca(marcaEntity);
+		modeloEntity.setNome(modelo);
+		return this.modeloRepository.save(modeloEntity);
 	}
 
 }

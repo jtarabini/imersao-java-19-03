@@ -1,7 +1,5 @@
 package br.com.targettrust.traccadastros.repositorios;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +17,11 @@ import br.com.targettrust.traccadastros.entidades.Carro;
 import br.com.targettrust.traccadastros.entidades.Cliente;
 import br.com.targettrust.traccadastros.entidades.Funcionario;
 import br.com.targettrust.traccadastros.entidades.Locacao;
+import br.com.targettrust.traccadastros.entidades.Marca;
+import br.com.targettrust.traccadastros.entidades.Modelo;
 import br.com.targettrust.traccadastros.repositorio.LocacaoRepository;
+import br.com.targettrust.traccadastros.repositorio.MarcaRepository;
+import br.com.targettrust.traccadastros.repositorio.ModeloRepository;
 import br.com.targettrust.traccadastros.repositorio.UsuarioRepository;
 import br.com.targettrust.traccadastros.repositorio.VeiculoRepository;
 import br.com.targettrust.traccadastros.util.DateUtil;
@@ -29,18 +31,27 @@ import br.com.targettrust.traccadastros.util.DateUtil;
 public class LocacaoRepositoryTest {
 	
 	private static final String PLACA_DEFAULT = "IXX-9I99";
+	private static final int DEFAULT_ANO = 2012;
+	private static final String DEFAULT_MODELO = "A5";
+	private static final String DEFAULT_MARCA = "Audi";
 	@Autowired
 	private LocacaoRepository locacaoRepository;
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	@Autowired
 	private VeiculoRepository veiculoRepository;
+	@Autowired
+	private ModeloRepository modeloRepository;
+	@Autowired
+	private MarcaRepository marcaRepository;
 	
 	@Before
 	@After
 	public void cleanup() {
 		locacaoRepository.deleteByVeiculo(PLACA_DEFAULT);
 		veiculoRepository.deleteByPlaca(PLACA_DEFAULT);
+		modeloRepository.deleteByNome(DEFAULT_MODELO);
+		marcaRepository.deleteByNome(DEFAULT_MARCA);
 	}
 
 	@Test
@@ -121,14 +132,24 @@ public class LocacaoRepositoryTest {
 
 	private Carro createCarro() {
 		Carro carro = new Carro();
-		carro.setMarca("Audi");
-		carro.setModelo("A5");
-		carro.setAno(2019);
+		carro.setModelo(this.createMarcaAndModelo(DEFAULT_MARCA, DEFAULT_MODELO, DEFAULT_ANO));
+		carro.setAnoFabricacao(2019);
 		carro.setPlaca(PLACA_DEFAULT);
 		carro.setCor("Branca");
 		carro.setPortas(4);
 		carro.setId(veiculoRepository.save(carro).getId());
 		return carro;
+	}
+	
+	private Modelo createMarcaAndModelo(String marca, String modelo, int ano) {
+		Marca marcaEntity = new Marca();
+		marcaEntity.setNome(marca);
+		this.marcaRepository.save(marcaEntity);
+		Modelo modeloEntity = new Modelo();
+		modeloEntity.setAno(ano);
+		modeloEntity.setMarca(marcaEntity);
+		modeloEntity.setNome(modelo);
+		return this.modeloRepository.save(modeloEntity);
 	}
 
 	private Cliente createCliente() {
