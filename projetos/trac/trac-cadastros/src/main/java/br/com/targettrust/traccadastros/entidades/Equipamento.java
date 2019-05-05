@@ -1,13 +1,9 @@
 package br.com.targettrust.traccadastros.entidades;
 
-import java.util.Set;
-
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-
 import javax.persistence.Table;
 
 @Entity
