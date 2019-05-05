@@ -1,12 +1,15 @@
 package br.com.targettrust.traccadastros.entidades;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -41,6 +44,12 @@ public class Locacao extends Entidade{
 	
 	@Column(name="vlr_pago")
 	private Double valor;
+
+	@ManyToMany
+	@JoinTable(name = "rl_locacao_equipamento", 
+		inverseJoinColumns = {@JoinColumn(name = "id_equipamento", referencedColumnName = "id") }, 
+		joinColumns = {@JoinColumn(name = "id_locacao", referencedColumnName = "id") } )
+	private Set<Equipamento> equipamentos;
 
 	public Veiculo getVeiculo() {
 		return veiculo;
