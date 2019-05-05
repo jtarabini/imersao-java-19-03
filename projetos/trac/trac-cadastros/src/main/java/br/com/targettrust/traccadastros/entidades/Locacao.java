@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 
 @Entity
 @Table(name="tb_locacao")
@@ -36,10 +38,12 @@ public class Locacao extends Entidade{
 	
 	@Column(name="dt_inicio")
 	@Temporal(TemporalType.TIMESTAMP)
+	@FutureOrPresent
 	private Date dataInicial;
 	
 	@Column(name="dt_fim")
 	@Temporal(TemporalType.TIMESTAMP)
+	@Future
 	private Date dataFinal;
 	
 	@Column(name="vlr_pago")
