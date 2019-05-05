@@ -1,12 +1,15 @@
 package br.com.targettrust.traccadastros.entidades;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -40,6 +43,12 @@ public class Reserva extends Entidade{
 	@Column(name="dt_cancelamento")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCancelamento;
+
+	@ManyToMany
+	@JoinTable(name = "rl_reserva_equipamento", 
+		inverseJoinColumns = {@JoinColumn(name = "id_equipamento", referencedColumnName = "id") }, 
+		joinColumns = {@JoinColumn(name = "id_reserva", referencedColumnName = "id") } )
+	private Set<Equipamento> equipamentos;
 
 	public Cliente getCliente() {
 		return cliente;
@@ -87,6 +96,14 @@ public class Reserva extends Entidade{
 
 	public void setDataCancelamento(Date dataCancelamento) {
 		this.dataCancelamento = dataCancelamento;
+	}
+
+	public Set<Equipamento> getEquipamentos() {
+		return equipamentos;
+	}
+
+	public void setEquipamentos(Set<Equipamento> equipamentos) {
+		this.equipamentos = equipamentos;
 	}
 	
 	

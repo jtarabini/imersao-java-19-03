@@ -15,8 +15,8 @@ public class Entidade {
 	private Long id;
 
 	@Version
-	@Column(name="versao")
-	private Integer versao;
+	@Column(name="version")
+	private Integer version;
 	
 	public Long getId() {
 		return id;
@@ -26,12 +26,12 @@ public class Entidade {
 		this.id = id;
 	}
 
-	public Integer getVersao() {
-		return versao;
+	public Integer getVersion() {
+		return version;
 	}
 
-	public void setVersao(Integer versao) {
-		this.versao = versao;
+	public void setVersion(Integer versao) {
+		this.version = versao;
 	}
 	
 	

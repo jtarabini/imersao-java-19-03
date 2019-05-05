@@ -10,10 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -28,20 +27,16 @@ public abstract class Veiculo extends Entidade {
 	@Column(name="vcl_placa", length=8, unique=true)
 	@Size(min=8, max=8)
 	private String placa;
-	@Column(name="vcl_ano", length=4)
-	private Integer ano;
+	@Column(name="vcl_ano_fabricacao", length=4)
+	private Integer anoFabricacao;
 	@Column(name="vcl_cor", length=20)
 	private String cor;
-	@Column(name="vcl_marca", length=10)
-	private String marca;
-	@Column(name="vcl_modelo", length=20)
-	private String modelo;
+	@ManyToOne
+	@JoinColumn(name="id_modelo")
+	private Modelo modelo;
 
-	@ManyToMany
-	@JoinTable(name = "rl_veiculo_equipamento", 
-		inverseJoinColumns = {@JoinColumn(name = "id_equipamento", referencedColumnName = "id") }, 
-		joinColumns = {@JoinColumn(name = "id_veiculo", referencedColumnName = "id") } )
-	private Set<Equipamento> equipamentos;
+	@ManyToMany(mappedBy = "veiculos")
+	private Set<Acessorio> acessorios;
 
 	public String getPlaca() {
 		return placa;
@@ -51,12 +46,12 @@ public abstract class Veiculo extends Entidade {
 		this.placa = placa;
 	}
 
-	public Integer getAno() {
-		return ano;
+	public Integer getAnoFabricacao() {
+		return anoFabricacao;
 	}
 
-	public void setAno(Integer ano) {
-		this.ano = ano;
+	public void setAnoFabricacao(Integer anoFabricacao) {
+		this.anoFabricacao = anoFabricacao;
 	}
 
 	public String getCor() {
@@ -67,28 +62,20 @@ public abstract class Veiculo extends Entidade {
 		this.cor = cor;
 	}
 
-	public String getMarca() {
-		return marca;
-	}
-
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
-	public String getModelo() {
+	public Modelo getModelo() {
 		return modelo;
 	}
 
-	public void setModelo(String modelo) {
+	public void setModelo(Modelo modelo) {
 		this.modelo = modelo;
 	}
 
-	public Set<Equipamento> getEquipamentos() {
-		return equipamentos;
+	public Set<Acessorio> getAcessorios() {
+		return acessorios;
 	}
 
-	public void setEquipamentos(Set<Equipamento> equipamentos) {
-		this.equipamentos = equipamentos;
+	public void setAcessorios(Set<Acessorio> acessorios) {
+		this.acessorios = acessorios;
 	}
 
 }

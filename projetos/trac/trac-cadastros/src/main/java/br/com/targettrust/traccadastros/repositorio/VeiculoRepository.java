@@ -13,9 +13,11 @@ public interface VeiculoRepository extends JpaRepository<Veiculo, Long>{
 	@Transactional
 	void deleteByPlaca(String placa);
 	
-	@Query(" from Veiculo veiculo"+ 
-	       " join fetch veiculo.equipamentos equipamento "+ 
-		   " where veiculo.id = :id")
-	Veiculo findVeiculoComEquipamentosById(@Param("id") Long id);
+	@Query("                  from Veiculo veiculo"+ 
+	       " left outer join fetch veiculo.acessorios acessoriosVeiculo "+
+	       "            join fetch veiculo.modelo modelo "+ 
+	       " left outer join fetch modelo.acessorios acessoriosModelo "+
+		   "                 where veiculo.id = :id")
+	Veiculo findVeiculoComAcessoriosById(@Param("id") Long id);
 
 }
