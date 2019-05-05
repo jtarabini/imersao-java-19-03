@@ -26,7 +26,7 @@ public class Acessorio extends Entidade {
 	@JoinTable(name = "rl_modelo_acessorio", 
 		inverseJoinColumns = {@JoinColumn(name = "id_acessorio", referencedColumnName = "id") }, 
 		joinColumns = {@JoinColumn(name = "id_modelo", referencedColumnName = "id") } )
-	private Set<Modelo> modelos;
+	private Set<Marca> modelos;
 
 	public String getDescricao() {
 		return descricao;
@@ -44,11 +44,11 @@ public class Acessorio extends Entidade {
 		this.veiculos = veiculos;
 	}
 
-	public Set<Modelo> getModelos() {
+	public Set<Marca> getModelos() {
 		return modelos;
 	}
 
-	public void setModelos(Set<Modelo> modelos) {
+	public void setModelos(Set<Marca> modelos) {
 		this.modelos = modelos;
 	}
 	
