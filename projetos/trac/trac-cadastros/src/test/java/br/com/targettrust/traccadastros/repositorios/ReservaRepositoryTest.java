@@ -16,7 +16,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import br.com.targettrust.traccadastros.entidades.Carro;
 import br.com.targettrust.traccadastros.entidades.Cliente;
 import br.com.targettrust.traccadastros.entidades.Funcionario;
+import br.com.targettrust.traccadastros.entidades.Marca;
+import br.com.targettrust.traccadastros.entidades.Modelo;
 import br.com.targettrust.traccadastros.entidades.Reserva;
+import br.com.targettrust.traccadastros.repositorio.MarcaRepository;
+import br.com.targettrust.traccadastros.repositorio.ModeloRepository;
 import br.com.targettrust.traccadastros.repositorio.ReservaRepository;
 import br.com.targettrust.traccadastros.repositorio.UsuarioRepository;
 import br.com.targettrust.traccadastros.repositorio.VeiculoRepository;
@@ -29,12 +33,19 @@ public class ReservaRepositoryTest {
 	private static final String ADMINISTRADOR_LOGIN = "administrador";
 	private static final String CLIENTE_LOGIN = "target.trust";
 	private static final String PLACA_DEFAULT = "HHH-9898";
+	private static final int DEFAULT_ANO = 2012;
+	private static final String DEFAULT_MODELO = "A200";
+	private static final String DEFAULT_MARCA = "Mercedes";
 	@Autowired
 	private ReservaRepository reservaRepository;
 	@Autowired
 	private VeiculoRepository veiculoRepository;
 	@Autowired 
 	private UsuarioRepository usuarioRepository;
+	@Autowired
+	private ModeloRepository modeloRepository;
+	@Autowired
+	private MarcaRepository marcaRepository;
 	
 	@Before
 	@After
@@ -64,7 +75,7 @@ public class ReservaRepositoryTest {
 	public void carroComReservaDeveRetornarUmaReserva() {
 		// Arrange
 		Carro carro = createCarro();
-		Reserva reserva = createReserva(
+		createReserva(
 				carro, 
 				DateUtil.createDate("01/05/2019 12:00"),
 				DateUtil.createDate("10/05/2019 14:00"));
@@ -81,7 +92,7 @@ public class ReservaRepositoryTest {
 	public void carroComReservaForaDaDataDeveRetornarVazio() {
 		// Arrange
 		Carro carro = createCarro();
-		Reserva reserva = createReserva(
+		createReserva(
 				carro, 
 				DateUtil.createDate("01/05/2019 12:00"),
 				DateUtil.createDate("10/05/2019 14:00"));
@@ -124,13 +135,23 @@ public class ReservaRepositoryTest {
 
 	private Carro createCarro() {
 		Carro carro = new Carro();
-		carro.setAno(2012);
-		carro.setMarca("Mercedes");
+		carro.setAnoFabricacao(2012);
 		carro.setCor("Branca");
-		carro.setModelo("A200");
+		carro.setModelo(this.createMarcaAndModelo(DEFAULT_MARCA, DEFAULT_MODELO, DEFAULT_ANO));
 		carro.setPlaca(PLACA_DEFAULT);
 		carro.setPortas(4);
 		return veiculoRepository.save(carro);
+	}
+	
+	private Modelo createMarcaAndModelo(String marca, String modelo, int ano) {
+		Marca marcaEntity = new Marca();
+		marcaEntity.setNome(marca);
+		this.marcaRepository.save(marcaEntity);
+		Modelo modeloEntity = new Modelo();
+		modeloEntity.setAno(ano);
+		modeloEntity.setMarca(marcaEntity);
+		modeloEntity.setNome(modelo);
+		return this.modeloRepository.save(modeloEntity);
 	}
 
 }
