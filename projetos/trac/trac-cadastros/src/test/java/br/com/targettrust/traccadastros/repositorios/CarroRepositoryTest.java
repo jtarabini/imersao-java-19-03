@@ -88,7 +88,6 @@ public class CarroRepositoryTest {
 	}
 	
 	@Test
-	@Ignore
 	public void insertCarrosComAcessorios() {
 		Set<Acessorio> acessorios = new HashSet<>();
 		for(int i=0; i< 30; i++) {

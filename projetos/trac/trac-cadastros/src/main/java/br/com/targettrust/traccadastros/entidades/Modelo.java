@@ -1,13 +1,9 @@
 package br.com.targettrust.traccadastros.entidades;
 
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_modelo")
@@ -24,8 +20,16 @@ public class Modelo extends Entidade{
 	@JoinColumn(name="id_marca")
 	private Marca marca;
 
-	@ManyToMany(mappedBy = "modelos")
+	@ManyToMany
+	@JoinTable(name = "rl_modelo_acessorio",
+			joinColumns = {@JoinColumn(name = "id_acessorio", referencedColumnName = "id") },
+			inverseJoinColumns = {@JoinColumn(name = "id_modelo", referencedColumnName = "id") } )
 	private Set<Acessorio> acessorios;
+
+	@ElementCollection
+	@CollectionTable(name ="rl_anos_modelos")
+	@Column(name="ano")
+	private List<Integer> anos;
 	
 	
 
@@ -68,7 +72,12 @@ public class Modelo extends Entidade{
 	public void setAcessorios(Set<Acessorio> acessorios) {
 		this.acessorios = acessorios;
 	}
-	
-	
 
+	public List<Integer> getAnos() {
+		return anos;
+	}
+
+	public void setAnos(List<Integer> anos) {
+		this.anos = anos;
+	}
 }

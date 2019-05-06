@@ -16,17 +16,11 @@ public class Acessorio extends Entidade {
 	@Column(name="acs_descricao")
 	private String descricao;
 
-	@ManyToMany
-	@JoinTable(name = "rl_veiculo_acessorio", 
-		inverseJoinColumns = {@JoinColumn(name = "id_acessorio", referencedColumnName = "id") }, 
-		joinColumns = {@JoinColumn(name = "id_veiculo", referencedColumnName = "id") } )
+	@ManyToMany(mappedBy = "acessorios")
 	private Set<Veiculo> veiculos;
 
-	@ManyToMany
-	@JoinTable(name = "rl_modelo_acessorio", 
-		inverseJoinColumns = {@JoinColumn(name = "id_acessorio", referencedColumnName = "id") }, 
-		joinColumns = {@JoinColumn(name = "id_modelo", referencedColumnName = "id") } )
-	private Set<Marca> modelos;
+	@ManyToMany(mappedBy = "acessorios")
+	private Set<Modelo> modelos;
 
 	public String getDescricao() {
 		return descricao;
@@ -44,11 +38,11 @@ public class Acessorio extends Entidade {
 		this.veiculos = veiculos;
 	}
 
-	public Set<Marca> getModelos() {
+	public Set<Modelo> getModelos() {
 		return modelos;
 	}
 
-	public void setModelos(Set<Marca> modelos) {
+	public void setModelos(Set<Modelo> modelos) {
 		this.modelos = modelos;
 	}
 	
