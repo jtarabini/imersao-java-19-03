@@ -42,7 +42,6 @@ public class Reserva extends Entidade{
 	@Column(name="dt_final")
 	@Future
 	@Temporal(TemporalType.TIMESTAMP)
-	@Future
 	private Date dataFinal;
 	
 	@Column(name="dt_cancelamento")
