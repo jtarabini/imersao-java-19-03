@@ -24,6 +24,8 @@ import br.com.targettrust.traccadastros.repositorio.MarcaRepository;
 import br.com.targettrust.traccadastros.repositorio.ModeloRepository;
 import br.com.targettrust.traccadastros.repositorio.VeiculoRepository;
 
+import javax.xml.bind.ValidationException;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CarroRepositoryTest {
@@ -45,9 +47,9 @@ public class CarroRepositoryTest {
 	@Before
 	@After
 	public void setup() {
-		repository.deleteByPlaca(PLACA_DEFAULT);
+		repository.deleteByMarca(DEFAULT_MARCA);
 		acessorioRepository.deleteByDescricao(PLACA_DEFAULT);
-		modeloRepository.deleteByNome(DEFAULT_MODELO);
+		modeloRepository.deleteByMarca(DEFAULT_MARCA);
 		marcaRepository.deleteByNome(DEFAULT_MARCA);
 	}
 	
@@ -65,8 +67,7 @@ public class CarroRepositoryTest {
 		repository.save(carro);	
 	}
 	
-	@Test
-	@Ignore
+	@Test(expected = TransactionSystemException.class)
 	public void salvaPortasNegativa() {
 		Carro carro = createCarroInstance();
 		carro.setPortas(-1);

@@ -37,7 +37,7 @@ public class CustomRepositoryTest {
 	@After
 	public void setup() {
 		veiculoRepository.deleteByPlaca(DEFAULT_PLACA);	
-		modeloRepository.deleteByNome(DEFAULT_MODELO);
+		modeloRepository.deleteByMarca(DEFAULT_MARCA);
 		marcaRepository.deleteByNome(DEFAULT_MARCA);	
 	}
 	
