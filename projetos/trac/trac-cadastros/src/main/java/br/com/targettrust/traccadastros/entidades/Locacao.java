@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 
+
 @Entity
 @Table(name="tb_locacao")
 @AttributeOverrides({

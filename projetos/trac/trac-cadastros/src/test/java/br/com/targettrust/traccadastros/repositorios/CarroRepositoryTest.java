@@ -51,6 +51,30 @@ public class CarroRepositoryTest {
 		marcaRepository.deleteByNome(DEFAULT_MARCA);
 	}
 	
+	@Test(expected=TransactionSystemException.class)
+	public void testaPlacaInvalidaMinima() {
+		Carro carro = new Carro();
+		carro.setAno(2012);
+		carro.setCor("Prata");
+		carro.setMarca("Mercedes");
+		carro.setModelo("C180");
+		carro.setPlaca(PLACA_INVALIDA_MINIMA_DEFAULT);
+		carro.setPortas(4);
+		repository.save(carro);	
+	}
+
+	@Test(expected=TransactionSystemException.class)
+	public void testaPlacaInvalidaMaxima() {
+		Carro carro = new Carro();
+		carro.setAno(2012);
+		carro.setCor("Prata");
+		carro.setMarca("Mercedes");
+		carro.setModelo("C180");
+		carro.setPlaca(PLACA_INVALIDA_MAXIMA_DEFAULT);
+		carro.setPortas(4);
+		repository.save(carro);	
+	}
+	
 	@Test
 	public void basicInsertTest() {
 		Carro carro = createCarroInstance();
@@ -101,7 +125,6 @@ public class CarroRepositoryTest {
 		
 		dbCarro.setAcessorios(acessorios);	
 		this.repository.save(dbCarro);
-		
 		dbCarro = (Carro) this.repository.findVeiculoComAcessoriosById(dbCarro.getId());
 		Assert.assertThat(dbCarro.getAcessorios(), Matchers.not(Matchers.empty()));	
 	}
