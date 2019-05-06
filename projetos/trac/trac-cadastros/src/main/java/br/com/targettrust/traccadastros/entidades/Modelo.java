@@ -2,12 +2,7 @@ package br.com.targettrust.traccadastros.entidades;
 
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_modelo")
@@ -26,6 +21,11 @@ public class Modelo extends Entidade{
 
 	@ManyToMany(mappedBy = "modelos")
 	private Set<Acessorio> acessorios;
+
+	@ElementCollection
+	@CollectionTable(name ="rl_anos_modelos")
+	@Column(name="ano")
+	private Set<Integer> anos;
 	
 	
 
@@ -71,4 +71,14 @@ public class Modelo extends Entidade{
 	
 	
 
+<<<<<<< Updated upstream
+=======
+	public Set<Integer> getAnos() {
+		return anos;
+	}
+
+	public void setAnos(Set<Integer> anos) {
+		this.anos = anos;
+	}
+>>>>>>> Stashed changes
 }

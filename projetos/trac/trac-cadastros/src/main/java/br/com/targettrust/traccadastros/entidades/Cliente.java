@@ -32,6 +32,12 @@ public class Cliente extends Usuario {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }
