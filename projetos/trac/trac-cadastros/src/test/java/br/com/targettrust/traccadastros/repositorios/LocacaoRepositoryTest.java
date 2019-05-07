@@ -1,5 +1,10 @@
 package br.com.targettrust.traccadastros.repositorios;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.temporal.TemporalAmount;
 import java.util.Date;
 import java.util.List;
 
@@ -50,7 +55,7 @@ public class LocacaoRepositoryTest {
 	public void cleanup() {
 		locacaoRepository.deleteByVeiculo(PLACA_DEFAULT);
 		veiculoRepository.deleteByPlaca(PLACA_DEFAULT);
-		modeloRepository.deleteByNome(DEFAULT_MODELO);
+		modeloRepository.deleteByMarca(DEFAULT_MARCA);
 		marcaRepository.deleteByNome(DEFAULT_MARCA);
 	}
 
@@ -98,21 +103,21 @@ public class LocacaoRepositoryTest {
 		Funcionario funcionario = createFuncionario();
 		Cliente cliente = createCliente();
 		Carro carro = createCarro();
-		createLocacao(funcionario, cliente, carro, 
-				DateUtil.createDate("01/01/2019 14:00"), 
-				DateUtil.createDate("03/01/2019 12:00"));
-		createLocacao(funcionario, cliente, carro, 
-				DateUtil.createDate("05/01/2019 14:00"), 
-				DateUtil.createDate("06/01/2019 12:00"));
-		createLocacao(funcionario, cliente, carro, 
-				DateUtil.createDate("05/02/2019 14:00"), 
-				DateUtil.createDate("06/02/2019 12:00"));
+		createLocacao(funcionario, cliente, carro,
+				Date.from(LocalDate.now().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant()),
+				Date.from(LocalDate.now().plusDays(2).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		createLocacao(funcionario, cliente, carro,
+				Date.from(LocalDate.now().plusDays(3).atStartOfDay(ZoneId.systemDefault()).toInstant()),
+				Date.from(LocalDate.now().plusDays(4).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		createLocacao(funcionario, cliente, carro,
+				Date.from(LocalDate.now().plusDays(5).atStartOfDay(ZoneId.systemDefault()).toInstant()),
+				Date.from(LocalDate.now().plusDays(6).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 		//Act
 		List<Locacao> locacoes = locacaoRepository
-				.findByFuncionario(funcionario, 
-						DateUtil.createDate("01/01/2019 00:00"), 
-						DateUtil.createDate("31/01/2019 23:59"));
-		//Assert TODO
+				.findByFuncionario(funcionario,
+						Date.from(LocalDate.now().plusDays(3).atStartOfDay(ZoneId.systemDefault()).toInstant()),
+						Date.from(LocalDate.now().plusDays(7).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		//Assert
 		Assert.assertThat(locacoes, Matchers.notNullValue());
 		Assert.assertThat(locacoes.size(), Matchers.equalTo(2));
 		

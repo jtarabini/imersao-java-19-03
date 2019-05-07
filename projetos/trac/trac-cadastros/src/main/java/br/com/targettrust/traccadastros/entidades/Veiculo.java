@@ -2,17 +2,7 @@ package br.com.targettrust.traccadastros.entidades;
 
 import java.util.Set;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -35,7 +25,10 @@ public abstract class Veiculo extends Entidade {
 	@JoinColumn(name="id_modelo")
 	private Modelo modelo;
 
-	@ManyToMany(mappedBy = "veiculos")
+	@ManyToMany
+	@JoinTable(name = "rl_veiculo_acessorio",
+			joinColumns = {@JoinColumn(name = "id_acessorio", referencedColumnName = "id") },
+			inverseJoinColumns = {@JoinColumn(name = "id_veiculo", referencedColumnName = "id") } )
 	private Set<Acessorio> acessorios;
 
 	public String getPlaca() {

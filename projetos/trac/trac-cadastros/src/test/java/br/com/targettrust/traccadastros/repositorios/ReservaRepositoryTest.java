@@ -1,5 +1,7 @@
 package br.com.targettrust.traccadastros.repositorios;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -76,14 +78,14 @@ public class ReservaRepositoryTest {
 		// Arrange
 		Carro carro = createCarro();
 		createReserva(
-				carro, 
-				DateUtil.createDate("01/05/2019 12:00"),
-				DateUtil.createDate("10/05/2019 14:00"));
+				carro,
+				Date.from(LocalDate.now().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant()),
+				Date.from(LocalDate.now().plusDays(11).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 		// Act
 		List<Reserva> reservas = reservaRepository.findByPlacaVeiculo(
-				PLACA_DEFAULT, 
-				DateUtil.createDate("02/05/2019 00:00"), 
-				DateUtil.createDate("09/05/2019 23:59"));
+				PLACA_DEFAULT,
+				Date.from(LocalDate.now().plusDays(2).atStartOfDay(ZoneId.systemDefault()).toInstant()),
+				Date.from(LocalDate.now().plusDays(10).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 		// Assert
 		Assert.assertThat(reservas, Matchers.hasSize(1));
 	}
@@ -93,14 +95,14 @@ public class ReservaRepositoryTest {
 		// Arrange
 		Carro carro = createCarro();
 		createReserva(
-				carro, 
-				DateUtil.createDate("01/05/2019 12:00"),
-				DateUtil.createDate("10/05/2019 14:00"));
+				carro,
+				Date.from(LocalDate.now().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant()),
+				Date.from(LocalDate.now().plusDays(11).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 		// Act
 		List<Reserva> reservas = reservaRepository.findByPlacaVeiculo(
-				PLACA_DEFAULT, 
-				DateUtil.createDate("12/05/2019 00:00"), 
-				DateUtil.createDate("19/05/2019 23:59"));
+				PLACA_DEFAULT,
+				Date.from(LocalDate.now().plusDays(12).atStartOfDay(ZoneId.systemDefault()).toInstant()),
+				Date.from(LocalDate.now().plusDays(22).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 		// Assert
 		Assert.assertThat(reservas, Matchers.empty());
 	}
