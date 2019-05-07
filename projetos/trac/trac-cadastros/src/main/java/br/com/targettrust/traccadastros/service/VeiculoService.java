@@ -12,7 +12,7 @@ import br.com.targettrust.traccadastros.repositorio.LocacaoRepository;
 import br.com.targettrust.traccadastros.repositorio.ReservaRepository;
 
 @Service
-public class UsuarioService {
+public class VeiculoService {
 	
 	@Autowired
 	private ReservaRepository reservaRepository;

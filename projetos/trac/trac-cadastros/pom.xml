@@ -35,6 +35,14 @@
 			<artifactId>postgresql</artifactId>
 			<version>42.2.5</version>
 		</dependency>
+		<!--Banco em memória para testes -->
+		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.199</version>
+			<scope>test</scope>
+		</dependency>
 		
 		<!--  Início das dependências de validação de beans -->
 		<dependency>
