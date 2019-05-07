@@ -1,20 +1,5 @@
 package br.com.targettrust.traccadastros.repositorios;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.hamcrest.Matchers;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.TransactionSystemException;
-
 import br.com.targettrust.traccadastros.entidades.Acessorio;
 import br.com.targettrust.traccadastros.entidades.Carro;
 import br.com.targettrust.traccadastros.entidades.Marca;
@@ -23,8 +8,19 @@ import br.com.targettrust.traccadastros.repositorio.AcessorioRepository;
 import br.com.targettrust.traccadastros.repositorio.MarcaRepository;
 import br.com.targettrust.traccadastros.repositorio.ModeloRepository;
 import br.com.targettrust.traccadastros.repositorio.VeiculoRepository;
+import org.hamcrest.Matchers;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.TransactionSystemException;
 
-import javax.xml.bind.ValidationException;
+import java.util.HashSet;
+import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

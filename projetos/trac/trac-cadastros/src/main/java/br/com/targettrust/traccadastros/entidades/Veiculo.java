@@ -19,6 +19,8 @@ public abstract class Veiculo extends Entidade {
 	private String placa;
 	@Column(name="vcl_ano_fabricacao", length=4)
 	private Integer anoFabricacao;
+	@Column(name="vcl_ano_modelo", length=4)
+	private Integer anoModelo;
 	@Column(name="vcl_cor", length=20)
 	private String cor;
 	@ManyToOne
