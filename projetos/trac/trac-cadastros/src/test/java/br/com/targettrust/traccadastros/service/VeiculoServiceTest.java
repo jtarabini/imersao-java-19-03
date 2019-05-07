@@ -1,11 +1,9 @@
-package br.com.targettrust.traccadastros;
+package br.com.targettrust.traccadastros.service;
 
-import br.com.targettrust.traccadastros.entidades.Carro;
-import br.com.targettrust.traccadastros.entidades.Cliente;
-import br.com.targettrust.traccadastros.entidades.Funcionario;
-import br.com.targettrust.traccadastros.repositorio.LocacaoRepository;
-import br.com.targettrust.traccadastros.service.VeiculoService;
-import br.com.targettrust.traccadastros.util.TestObjectFactory;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,9 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
+import br.com.targettrust.traccadastros.entidades.Carro;
+import br.com.targettrust.traccadastros.entidades.Cliente;
+import br.com.targettrust.traccadastros.entidades.Funcionario;
+import br.com.targettrust.traccadastros.util.TestObjectFactory;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -23,8 +22,6 @@ public class VeiculoServiceTest {
 
     @Autowired
     private VeiculoService veiculoService;
-    @Autowired
-    private LocacaoRepository locacaoRepository;
     @Autowired
     private TestObjectFactory testObjectFactory;
 
