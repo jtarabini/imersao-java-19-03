@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,15 @@ public class ReservaRepositoryTest {
 	@Autowired
 	private TestObjectFactory testObjectFactory;
 	
+	private Carro carro;
+	
+	@Before
+	public void setup() {
+		carro = testObjectFactory.createCarro();
+	}
+	
 	@Test
 	public void carroSemReservaDeveRetornarVazio() {
-		// Arrange
-		Carro carro = testObjectFactory.createCarro();
 		// Act
 		List<Reserva> reservas = reservaRepository
 				.findByPlacaVeiculo(carro.getPlaca(),
@@ -42,8 +48,6 @@ public class ReservaRepositoryTest {
 	
 	@Test
 	public void carroComReservaDeveRetornarUmaReserva() {
-		// Arrange
-		Carro carro = testObjectFactory.createCarro();
 		testObjectFactory.createReserva(
 				carro,
 				Date.from(LocalDate.now().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant()),
@@ -59,8 +63,6 @@ public class ReservaRepositoryTest {
 	
 	@Test
 	public void carroComReservaForaDaDataDeveRetornarVazio() {
-		// Arrange
-		Carro carro = testObjectFactory.createCarro();
 		testObjectFactory.createReserva(
 				carro,
 				Date.from(LocalDate.now().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant()),

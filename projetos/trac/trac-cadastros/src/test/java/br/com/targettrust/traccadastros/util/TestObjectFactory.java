@@ -52,7 +52,11 @@ public class TestObjectFactory {
     }
 
     public Carro createCarro() {
-        Carro carro = new Carro();
+    	Carro carro = (Carro) this.veiculoRepository.findByPlaca(PLACA_DEFAULT);
+    	if(carro != null) {
+    		return carro;
+    	}
+        carro = new Carro();
         carro.setModelo(this.createMarcaAndModelo(DEFAULT_MARCA, DEFAULT_MODELO, DEFAULT_ANO));
         carro.setAnoFabricacao(2019);
         carro.setPlaca(PLACA_DEFAULT);
@@ -63,15 +67,28 @@ public class TestObjectFactory {
     }
 
     public Modelo createMarcaAndModelo(String marca, String modelo, int ano) {
-        Marca marcaEntity = new Marca();
-        marcaEntity.setNome(marca);
-        this.marcaRepository.save(marcaEntity);
-        Modelo modeloEntity = new Modelo();
+    	Modelo modeloEntity = this.modeloRepository.findByNome(modelo);
+    	if(modeloEntity != null) {
+    		return modeloEntity;
+    	}
+        Marca marcaEntity = createMarca(marca);        
+        modeloEntity = new Modelo();
         modeloEntity.setAno(ano);
         modeloEntity.setMarca(marcaEntity);
         modeloEntity.setNome(modelo);
         return this.modeloRepository.save(modeloEntity);
     }
+
+	private Marca createMarca(String marca) {
+		Marca marcaEntity = this.marcaRepository.findByNome(marca);
+		if(marcaEntity != null) {
+			return marcaEntity;
+		}
+		marcaEntity = new Marca();
+        marcaEntity.setNome(marca);
+        this.marcaRepository.save(marcaEntity);
+		return marcaEntity;
+	}
 
     public Cliente createCliente() {
         Cliente cliente = new Cliente();

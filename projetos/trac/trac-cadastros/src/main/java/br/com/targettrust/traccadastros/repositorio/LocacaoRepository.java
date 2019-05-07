@@ -12,7 +12,6 @@ import org.springframework.data.repository.query.Param;
 
 import br.com.targettrust.traccadastros.entidades.Funcionario;
 import br.com.targettrust.traccadastros.entidades.Locacao;
-import br.com.targettrust.traccadastros.entidades.Reserva;
 
 public interface LocacaoRepository 
 	extends JpaRepository<Locacao, Long>{

@@ -10,4 +10,6 @@ public interface MarcaRepository extends JpaRepository<Marca, Long>{
 
 	@Transactional
 	void deleteByNome(String nome);
+
+	Marca findByNome(String nome);
 }

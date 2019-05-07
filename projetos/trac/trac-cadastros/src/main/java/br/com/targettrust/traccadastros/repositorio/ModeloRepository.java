@@ -13,6 +13,8 @@ public interface ModeloRepository extends JpaRepository<Modelo, Long>{
 
 	@Transactional
 	void deleteByNome(String nome);
+	
+	Modelo findByNome(String nome);
 
 	@Query("delete Modelo modelo "+
 			" where modelo.id in( "+
