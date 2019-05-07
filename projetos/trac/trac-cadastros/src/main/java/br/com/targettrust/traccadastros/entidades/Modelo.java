@@ -29,7 +29,7 @@ public class Modelo extends Entidade{
 	@ElementCollection
 	@CollectionTable(name ="rl_anos_modelos")
 	@Column(name="ano")
-	private List<Integer> anos;
+	private Set<Integer> anos;
 	
 	
 
@@ -72,12 +72,12 @@ public class Modelo extends Entidade{
 	public void setAcessorios(Set<Acessorio> acessorios) {
 		this.acessorios = acessorios;
 	}
-
-	public List<Integer> getAnos() {
+	public Set<Integer> getAnos() {
 		return anos;
 	}
 
-	public void setAnos(List<Integer> anos) {
+	public void setAnos(Set<Integer> anos) {
 		this.anos = anos;
 	}
+
 }
