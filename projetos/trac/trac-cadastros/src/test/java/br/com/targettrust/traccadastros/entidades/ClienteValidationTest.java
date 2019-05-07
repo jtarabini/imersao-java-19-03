@@ -31,12 +31,31 @@ public class ClienteValidationTest {
     }
 
     @Test
-    public void testInvalidEmail() {
+    public void testEmailInvalido() {
         Cliente cliente = buildValidCliente();
         cliente.setEmail("teste");
         Set<ConstraintViolation<Cliente>> violations = validator.validate(cliente);
         assertThat(violations, hasSize(1));
         assertThat(violations.iterator().next().getPropertyPath().toString(), equalTo("email"));
+    }
+
+
+    @Test
+    public void testSenhaInvalida() {
+        Cliente cliente = buildValidCliente();
+        cliente.setSenha("123456789012345678901");
+        Set<ConstraintViolation<Cliente>> violations = validator.validate(cliente);
+        assertThat(violations, hasSize(1));
+        assertThat(violations.iterator().next().getPropertyPath().toString(), equalTo("senha"));
+    }
+
+    @Test
+    public void testNomeInvalido() {
+        Cliente cliente = buildValidCliente();
+        cliente.setNome("Alberto");
+        Set<ConstraintViolation<Cliente>> violations = validator.validate(cliente);
+        assertThat(violations, hasSize(1));
+        assertThat(violations.iterator().next().getPropertyPath().toString(), equalTo("nome"));
     }
 
     private Cliente buildValidCliente() {

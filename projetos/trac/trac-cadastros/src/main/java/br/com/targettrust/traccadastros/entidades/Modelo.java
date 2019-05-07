@@ -68,11 +68,7 @@ public class Modelo extends Entidade{
 	public void setAcessorios(Set<Acessorio> acessorios) {
 		this.acessorios = acessorios;
 	}
-	
-	
 
-<<<<<<< Updated upstream
-=======
 	public Set<Integer> getAnos() {
 		return anos;
 	}
@@ -80,5 +76,5 @@ public class Modelo extends Entidade{
 	public void setAnos(Set<Integer> anos) {
 		this.anos = anos;
 	}
->>>>>>> Stashed changes
+
 }
