@@ -28,7 +28,7 @@ public class EquipamentoController {
 		return ResponseEntity.ok(equipamentoRepository.findAll());		
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/id/{id}")
 	public HttpEntity<Equipamento> findById(@PathVariable("id") Long id){
 		Optional<Equipamento> equipamento = equipamentoRepository.findById(id);
 		if(equipamento.isPresent()) {
