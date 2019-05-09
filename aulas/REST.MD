@@ -139,7 +139,7 @@ As operações mais comuns em recursos são as seguintes:
 |:----------------:|:----------:|:-----------------------------------------:|:-----------:|
 |       **C**      |  *Create*  | Criar uma nova instância do recurso       |     POST    |
 |       **R**      | *Retrieve* | Pesquisar dados em um formato conveniente |     GET     |
-|       **U**      |   *Update* | Atualizar dados                           |    UPDATE   |
+|       **U**      |   *Update* | Atualizar dados                           |     PUT     |
 |       **D**      |  *Delete*  | Deletar um recurso                        |    DELETE   | 
 
 

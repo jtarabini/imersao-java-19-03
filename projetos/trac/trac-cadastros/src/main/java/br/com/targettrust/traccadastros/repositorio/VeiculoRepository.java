@@ -13,6 +13,7 @@ public interface VeiculoRepository extends JpaRepository<Veiculo, Long>{
 
 	@Transactional
 	void deleteByPlaca(String placa);
+	
 	Veiculo findByPlaca(String placa);
 	
 	@Query("                  from Veiculo veiculo"+ 
