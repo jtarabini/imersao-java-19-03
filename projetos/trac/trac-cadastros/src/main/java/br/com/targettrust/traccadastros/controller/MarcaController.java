@@ -3,12 +3,19 @@ package br.com.targettrust.traccadastros.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,6 +43,32 @@ public class MarcaController {
 		else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
+	}
+	
+	@DeleteMapping("/{id}")
+	public void deleteById(@PathVariable("id") Long id) {
+		marcaRepository.deleteById(id);
+	}
+	
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public HttpEntity<Marca> createMarca(@Valid @RequestBody Marca marca) {
+		if(marca == null || marca.getId() != null) {
+			return ResponseEntity.badRequest().build();
+		}
+		return ResponseEntity.ok(marcaRepository.save(marca));		
+	}
+	
+	@PutMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public HttpEntity<Marca> updateMarca(@PathVariable("id") Long id, 
+			@Valid @RequestBody Marca marca) {
+		Optional<Marca> dbMarca = marcaRepository.findById(id);
+		if(dbMarca.isPresent()) {
+			dbMarca.get().setNome(marca.getNome());
+			dbMarca.get().setVersion(marca.getVersion());	
+			marcaRepository.save(dbMarca.get());
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.notFound().build();		
 	}
 
 }
