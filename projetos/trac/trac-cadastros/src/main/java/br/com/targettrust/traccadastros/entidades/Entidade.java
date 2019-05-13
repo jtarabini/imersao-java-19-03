@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @MappedSuperclass
 public class Entidade {
@@ -16,7 +18,7 @@ public class Entidade {
 
 	@Version
 	@Column(name="version")
-	private Integer version;
+	private long version;
 	
 	public Long getId() {
 		return id;
@@ -26,11 +28,11 @@ public class Entidade {
 		this.id = id;
 	}
 
-	public Integer getVersion() {
+	public long getVersion() {
 		return version;
 	}
 
-	public void setVersion(Integer versao) {
+	public void setVersion(long versao) {
 		this.version = versao;
 	}
 	

@@ -49,8 +49,13 @@ public class MarcaController {
 	public void deleteById(@PathVariable("id") Long id) {
 		marcaRepository.deleteById(id);
 	}
+
+	@DeleteMapping
+	public void deleteAll() {
+		marcaRepository.deleteAll();
+	}
 	
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PutMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public HttpEntity<Marca> createMarca(@Valid @RequestBody Marca marca) {
 		if(marca == null || marca.getId() != null) {
 			return ResponseEntity.badRequest().build();
@@ -58,15 +63,15 @@ public class MarcaController {
 		return ResponseEntity.ok(marcaRepository.save(marca));		
 	}
 	
-	@PutMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public HttpEntity<Marca> updateMarca(@PathVariable("id") Long id, 
 			@Valid @RequestBody Marca marca) {
+		if(!id.equals(marca.getId())) {
+			ResponseEntity.badRequest().build();
+		}
 		Optional<Marca> dbMarca = marcaRepository.findById(id);
 		if(dbMarca.isPresent()) {
-			dbMarca.get().setNome(marca.getNome());
-			dbMarca.get().setVersion(marca.getVersion());	
-			marcaRepository.save(dbMarca.get());
-			return ResponseEntity.ok().build();
+			return ResponseEntity.ok(marcaRepository.save(marca));
 		}
 		return ResponseEntity.notFound().build();		
 	}
