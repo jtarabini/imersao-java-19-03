@@ -79,7 +79,7 @@ public class TestObjectFactory {
         return this.modeloRepository.save(modeloEntity);
     }
 
-	private Marca createMarca(String marca) {
+	public Marca createMarca(String marca) {
 		Marca marcaEntity = this.marcaRepository.findByNome(marca);
 		if(marcaEntity != null) {
 			return marcaEntity;
