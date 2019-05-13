@@ -72,4 +72,7 @@ Este repositório contém o conteúdo passado durante as aulas e exercícios pro
       * Pausa para amarrar mais pontas soltas
         * Tema de casa
       * [Spring-web](./aulas/spring-web.MD)
+    * [09/05/2019](./aulas/2019_05_09.MD): 
+      * Implementando mais operações com REST
+      * Validando o request 
     
