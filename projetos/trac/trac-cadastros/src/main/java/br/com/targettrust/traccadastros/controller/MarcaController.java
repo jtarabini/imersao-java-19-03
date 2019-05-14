@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.targettrust.traccadastros.entidades.Marca;
@@ -32,6 +33,17 @@ public class MarcaController {
 	@GetMapping
 	public HttpEntity<List<Marca>> listAll() {
 		return ResponseEntity.ok(marcaRepository.findAll());		
+	}
+	
+	@GetMapping("/search")
+	public HttpEntity<List<Marca>> search(
+			@RequestParam(name="id", required=false) Long id, 
+			@RequestParam(name="nome", required=false) String nome) {
+		System.out.println(id);
+		System.out.println(nome);
+		return ResponseEntity.ok(
+				marcaRepository.search(id, nome)
+				);
 	}
 	
 	@GetMapping("/{id}")
