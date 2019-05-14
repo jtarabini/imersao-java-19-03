@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.targettrust.traccadastros.entidades.Equipamento;
@@ -45,6 +46,16 @@ public class EquipamentoController {
 		}		
 	}
 
+	@GetMapping("/search")
+	public HttpEntity<List<Equipamento>> search(
+			@RequestParam(name="id", required=false) Long id, 
+			@RequestParam(name="descricao", required=false) String descricao) {
+			descricao = descricao != null ? descricao.toUpperCase() : descricao;
+		return ResponseEntity.ok(
+				equipamentoRepository.search(id, descricao)
+				);
+	}
+	
 	@GetMapping("/desc/{descricao}")
 	public HttpEntity<Equipamento> findByDescricao(@PathVariable("descricao") String descricao){
 		Optional<Equipamento> equipamento = equipamentoRepository.findByDescricao(descricao.toUpperCase());
