@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.targettrust.traccadastros.entidades.Marca;
 import br.com.targettrust.traccadastros.entidades.Modelo;
 import br.com.targettrust.traccadastros.repositorio.ModeloRepository;
 
@@ -40,12 +39,14 @@ public class ModeloController {
 	public HttpEntity<List<Modelo>> search(
 			@RequestParam(name="id", required=false) Long id, 
 			@RequestParam(name="nome", required=false) String nome,
-			@RequestParam(name="ano", required=false) Integer ano) {
+			@RequestParam(name="ano", required=false) Integer ano,
+			@RequestParam(name="marca", required=false) String marca,
+			@RequestParam(name="idMarca", required=false) Long idMarca) {
 		System.out.println(id);
 		System.out.println(nome);
 		System.out.println(ano);
 		return ResponseEntity.ok(
-				modeloRepository.search(id, nome, ano)
+				modeloRepository.search(id, nome, ano, idMarca, marca)
 				);
 	}
 	
@@ -76,15 +77,15 @@ public class ModeloController {
 		modeloRepository.deleteById(id);
 	}
 	
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PutMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public HttpEntity<Modelo> createModelo(@Valid @RequestBody Modelo modelo) {
-		if(modelo == null || modelo.getId() != null) {
+		if(modelo == null) {
 			return ResponseEntity.badRequest().build();
 		}
 		return ResponseEntity.ok(modeloRepository.save(modelo));		
 	}
 	
-	@PutMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public HttpEntity<Modelo> updateModelo(@PathVariable("id") Long id, 
 			@Valid @RequestBody Modelo modelo) {
 		Optional<Modelo> dbModelo = modeloRepository.findById(id);

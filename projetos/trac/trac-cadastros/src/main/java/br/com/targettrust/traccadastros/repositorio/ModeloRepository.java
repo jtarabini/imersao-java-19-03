@@ -29,11 +29,16 @@ public interface ModeloRepository extends JpaRepository<Modelo, Long>{
 	
 	@Query("   select modelo "
 			+ "  from Modelo modelo "
+			+ "  join modelo.marca marca "
 			+ " where (:id    is null or modelo.id = :id )"
 			+ "   and (:nome  is null or modelo.nome = :nome )"
-			+ "   and (:ano is null or modelo.ano = :ano )")
+			+ "   and (:ano is null or modelo.ano = :ano )"
+			+ "   and (:idMarca is null or marca.id = :idMarca)"
+			+ "   and (:marca is null or UPPER(marca.nome) LIKE UPPER(concat(:marca, '%')) ) ")
 	List<Modelo> search(
 			@Param("id") Long id, 
 			@Param("nome") String nome,
-			@Param("ano") Integer ano);
+			@Param("ano") Integer ano,
+			@Param("idMarca") Long idMarca, 
+			@Param("marca") String marca);
 }
