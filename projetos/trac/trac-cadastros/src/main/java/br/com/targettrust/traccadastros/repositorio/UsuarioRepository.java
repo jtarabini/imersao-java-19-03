@@ -30,6 +30,12 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
 	@Query("from Funcionario where id = :id")
 	Optional<Funcionario> findFuncionarioById(@Param("id") Long id);
+	
+	@Query ("from Cliente")
+	List<Cliente> findClientes();
+	
+	@Query ("from Cliente where id = :id")
+	Optional<Cliente> findClienteById(@Param("id") Long id);
 
 
 }
