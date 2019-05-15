@@ -75,4 +75,11 @@ Este repositório contém o conteúdo passado durante as aulas e exercícios pro
     * [09/05/2019](./aulas/2019_05_09.MD): 
       * Implementando mais operações com REST
       * Validando o request 
-    
+* Semana 10
+    * [14/05/2019](./aulas/2019_05_14.MD): 
+      * Queries complexas
+      * Diferenças entre path e query params
+      * Equals e Hashcode - Para que implementar
+    * [16/05/2019](./aulas/2019_05_16.MD): 
+      * Tratamento de exceptions
+      * Date parsing
