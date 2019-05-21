@@ -33,6 +33,7 @@ public class ReservaRepositoryTest {
 	@Before
 	public void setup() {
 		carro = testObjectFactory.createCarro();
+		this.reservaRepository.deleteAll();
 	}
 	
 	@Test

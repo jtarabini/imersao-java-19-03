@@ -16,8 +16,35 @@ public class Entidade {
 
 	@Version
 	@Column(name="version")
-	private Integer version;
+	private long version;
 	
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Entidade other = (Entidade) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -26,11 +53,11 @@ public class Entidade {
 		this.id = id;
 	}
 
-	public Integer getVersion() {
+	public long getVersion() {
 		return version;
 	}
 
-	public void setVersion(Integer versao) {
+	public void setVersion(long versao) {
 		this.version = versao;
 	}
 	

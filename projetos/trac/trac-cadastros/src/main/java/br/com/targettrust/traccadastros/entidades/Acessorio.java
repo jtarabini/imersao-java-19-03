@@ -1,11 +1,15 @@
 package br.com.targettrust.traccadastros.entidades;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 @Entity
 @Table(name="tb_acessorio")
@@ -44,6 +48,14 @@ public class Acessorio extends Entidade {
 		this.modelos = modelos;
 	}
 	
-	
+	@Query("   select marca "
+			+ "  from Marca marca "
+			+ " where (:id is null or marca.id = :id )"
+			+ "   and (:nome is null or marca.nome = :nome )")
+	List<Marca> search(
+			@Param("id") Long id, 
+			@Param("nome") String nome);
+}
+
 
 }

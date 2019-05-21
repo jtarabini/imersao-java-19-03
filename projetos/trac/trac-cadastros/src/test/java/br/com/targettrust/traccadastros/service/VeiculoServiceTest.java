@@ -4,7 +4,11 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
+import br.com.targettrust.traccadastros.repositorio.LocacaoRepository;
+import br.com.targettrust.traccadastros.repositorio.ReservaRepository;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +27,18 @@ public class VeiculoServiceTest {
     @Autowired
     private VeiculoService veiculoService;
     @Autowired
+    private ReservaRepository reservaRepository;
+    @Autowired
+    private LocacaoRepository locacaoRepository;
+    @Autowired
     private TestObjectFactory testObjectFactory;
+
+    @Before
+    @After
+    public void setup() {
+        this.reservaRepository.deleteAll();
+        this.locacaoRepository.deleteAll();
+    }
 
     @Test
     public void testSemLocacoesEReservas() {

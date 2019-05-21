@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.targettrust.traccadastros.entidades.Marca;
@@ -34,6 +35,17 @@ public class MarcaController {
 		return ResponseEntity.ok(marcaRepository.findAll());		
 	}
 	
+	@GetMapping("/search")
+	public HttpEntity<List<Marca>> search(
+			@RequestParam(name="id", required=false) Long id, 
+			@RequestParam(name="nome", required=false) String nome) {
+		System.out.println(id);
+		System.out.println(nome);
+		return ResponseEntity.ok(
+				marcaRepository.search(id, nome)
+				);
+	}
+	
 	@GetMapping("/{id}")
 	public HttpEntity<Marca> findById(@PathVariable("id") Long id) {
 		Optional<Marca> marca = marcaRepository.findById(id);
@@ -49,8 +61,13 @@ public class MarcaController {
 	public void deleteById(@PathVariable("id") Long id) {
 		marcaRepository.deleteById(id);
 	}
+
+	@DeleteMapping
+	public void deleteAll() {
+		marcaRepository.deleteAll();
+	}
 	
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PutMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public HttpEntity<Marca> createMarca(@Valid @RequestBody Marca marca) {
 		if(marca == null || marca.getId() != null) {
 			return ResponseEntity.badRequest().build();
@@ -58,15 +75,15 @@ public class MarcaController {
 		return ResponseEntity.ok(marcaRepository.save(marca));		
 	}
 	
-	@PutMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(value="/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public HttpEntity<Marca> updateMarca(@PathVariable("id") Long id, 
 			@Valid @RequestBody Marca marca) {
+		if(!id.equals(marca.getId())) {
+			ResponseEntity.badRequest().build();
+		}
 		Optional<Marca> dbMarca = marcaRepository.findById(id);
 		if(dbMarca.isPresent()) {
-			dbMarca.get().setNome(marca.getNome());
-			dbMarca.get().setVersion(marca.getVersion());	
-			marcaRepository.save(dbMarca.get());
-			return ResponseEntity.ok().build();
+			return ResponseEntity.ok(marcaRepository.save(marca));
 		}
 		return ResponseEntity.notFound().build();		
 	}
