@@ -39,8 +39,6 @@ public class MarcaController {
 	public HttpEntity<List<Marca>> search(
 			@RequestParam(name="id", required=false) Long id, 
 			@RequestParam(name="nome", required=false) String nome) {
-		System.out.println(id);
-		System.out.println(nome);
 		return ResponseEntity.ok(
 				marcaRepository.search(id, nome)
 				);

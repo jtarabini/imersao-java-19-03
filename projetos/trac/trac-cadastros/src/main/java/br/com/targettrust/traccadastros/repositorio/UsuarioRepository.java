@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import br.com.targettrust.traccadastros.entidades.Cliente;
 import br.com.targettrust.traccadastros.entidades.Funcionario;
 import br.com.targettrust.traccadastros.entidades.Usuario;
 
