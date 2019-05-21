@@ -17,6 +17,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.PastOrPresent;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="tb_reserva")
 @AttributeOverrides({
@@ -37,6 +39,10 @@ public class Reserva extends Entidade{
 	@Column(name="dt_inicial")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Future
+	@JsonFormat(
+			shape=JsonFormat.Shape.STRING, 
+			pattern="dd.MM.yyyy HH:mm:ss",
+			timezone = "BRT")
 	private Date dataInicial;
 	
 	@Column(name="dt_final")
