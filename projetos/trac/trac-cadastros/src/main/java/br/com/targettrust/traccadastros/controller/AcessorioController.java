@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.targettrust.traccadastros.entidades.Acessorio;
@@ -33,6 +34,17 @@ public class AcessorioController {
 	@GetMapping
 	public HttpEntity<List<Acessorio>> listAll(){
 		return ResponseEntity.ok(acessorioRepository.findAll());		
+	}
+	
+	@GetMapping("/search")
+	public HttpEntity<List<Acessorio>> search(
+			@RequestParam(name="id", required = false) Long id, 
+			@RequestParam(name="descricao", required = false) String descricao) {
+		List<Acessorio> acessorios = 
+				acessorioRepository.search(id, descricao);
+		return acessorios == null || acessorios.isEmpty() ?
+				ResponseEntity.noContent().build() : 
+					ResponseEntity.ok(acessorios); 
 	}
 
 	@GetMapping("/descricao/{descricao}")
