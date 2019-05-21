@@ -48,11 +48,19 @@ public class Reserva extends Entidade{
 	@Column(name="dt_final")
 	@Future
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(
+			shape=JsonFormat.Shape.STRING, 
+			pattern="dd.MM.yyyy HH:mm:ss",
+			timezone = "BRT")
 	private Date dataFinal;
 	
 	@Column(name="dt_cancelamento")
 	@Temporal(TemporalType.TIMESTAMP)
 	@PastOrPresent
+	@JsonFormat(
+			shape=JsonFormat.Shape.STRING, 
+			pattern="dd.MM.yyyy HH:mm:ss",
+			timezone = "BRT")
 	private Date dataCancelamento;
 
 	@ManyToMany
