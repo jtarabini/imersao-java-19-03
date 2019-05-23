@@ -62,8 +62,6 @@ public class ReservaController {
 			reserva.setVeiculo(veiculoDisponivel);
 			return ResponseEntity.ok(reservaRepository.save(reserva));
 		}
-		
-		
 	}
 	
 	@ExceptionHandler(value = {MethodArgumentNotValidException.class})
