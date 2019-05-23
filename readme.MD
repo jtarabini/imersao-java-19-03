@@ -80,6 +80,8 @@ Este repositório contém o conteúdo passado durante as aulas e exercícios pro
       * Queries complexas
       * Diferenças entre path e query params
       * Equals e Hashcode - Para que implementar
-    * [16/05/2019](./aulas/2019_05_16.MD): 
+* Semana 11
+    * [21/05/2019](./aulas/2019_05_21.MD): 
       * Tratamento de exceptions
+      * DTO
       * Date parsing
