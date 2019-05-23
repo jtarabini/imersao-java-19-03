@@ -16,6 +16,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="tb_locacao")
@@ -26,27 +30,34 @@ public class Locacao extends Entidade{
 	
 	@ManyToOne
 	@JoinColumn(name="id_veiculo")
+	@NotNull
 	private Veiculo veiculo;
 	
 	@ManyToOne
 	@JoinColumn(name="id_cliente")
+	@NotNull
 	private Cliente cliente;
 	
 	@ManyToOne
 	@JoinColumn(name="id_funcionario")
+	@NotNull
 	private Funcionario funcionario;
 	
 	@Column(name="dt_inicio")
 	@Temporal(TemporalType.TIMESTAMP)
 	@FutureOrPresent
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
 	private Date dataInicial;
 	
 	@Column(name="dt_fim")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Future
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
 	private Date dataFinal;
 	
 	@Column(name="vlr_pago")
+	@NotNull
+	@Min(1)
 	private Double valor;
 
 	@ManyToMany

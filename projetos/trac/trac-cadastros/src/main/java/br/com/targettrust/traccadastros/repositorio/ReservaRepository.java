@@ -25,6 +25,16 @@ public interface ReservaRepository
 			@Param("dataInicial") Date dataInicial, 
 			@Param("dataFinal") Date dataFinal);
 
+	@Query("  from Reserva reserva "+ 
+	       " where reserva.veiculo.id = :id "
+	       + " and ( :dataInicial between reserva.dataInicial and reserva.dataFinal "
+	       + "       OR"
+	       + "       :dataFinal between reserva.dataInicial and reserva.dataFinal )")
+	List<Reserva> findByIdVeiculo(
+			@Param("id") Long id, 
+			@Param("dataInicial") Date dataInicial, 
+			@Param("dataFinal") Date dataFinal);
+
 	@Query("delete Reserva reserva "+ 
 	       " where reserva.id in( "+ 
 		   "        select id "+ 

@@ -19,12 +19,26 @@ public class VeiculoService {
 	@Autowired
 	private LocacaoRepository locacaoRepository;
 	
+	public Boolean veiculoEstaDisponivel(Long id, 
+			Date dataInicial, Date dataFinal) {
+		List<Locacao> locacoes = locacaoRepository
+				.findByIdVeiculo(id, dataInicial, dataFinal);
+		List<Reserva> reservas = reservaRepository
+				.findByIdVeiculo(id, dataInicial, dataFinal);
+		return checkVeiculoDisponivel(locacoes, reservas);
+		
+	}
+	
 	public Boolean veiculoEstaDisponivel(String placa, 
 			Date dataInicial, Date dataFinal) {
 		List<Locacao> locacoes = locacaoRepository
 				.findByPlacaVeiculo(placa, dataInicial, dataFinal);
 		List<Reserva> reservas = reservaRepository
 				.findByPlacaVeiculo(placa, dataInicial, dataFinal);
+		return checkVeiculoDisponivel(locacoes, reservas);
+	}
+
+	private Boolean checkVeiculoDisponivel(List<Locacao> locacoes, List<Reserva> reservas) {
 		// Pode retornar diretamente o resultado da expressão
 		if( (locacoes == null || locacoes.isEmpty()) &&
 		    (reservas == null || reservas.isEmpty()) )

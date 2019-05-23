@@ -37,6 +37,17 @@ public interface LocacaoRepository
 			@Param("dataInicial") Date dataInicial, 
 			@Param("dataFinal") Date dataFinal);
 
+
+	@Query("  from Locacao locacao "+ 
+	       " where locacao.veiculo.id = :id "
+	       + " and ( :dataInicial between locacao.dataInicial and locacao.dataFinal "
+	       + "       OR"
+	       + "       :dataFinal between locacao.dataInicial and locacao.dataFinal )")
+	List<Locacao> findByIdVeiculo(
+			@Param("id") Long id, 
+			@Param("dataInicial") Date dataInicial, 
+			@Param("dataFinal") Date dataFinal);
+
 	@Transactional
 	@Modifying
 	@Query(" delete from Locacao locacao " +
