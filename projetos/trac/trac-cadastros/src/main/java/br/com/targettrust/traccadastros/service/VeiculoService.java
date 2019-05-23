@@ -1,6 +1,6 @@
 package br.com.targettrust.traccadastros.service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class VeiculoService {
 	private LocacaoRepository locacaoRepository;
 	
 	public Boolean veiculoEstaDisponivel(String placa, 
-			Date dataInicial, Date dataFinal) {
+			LocalDate dataInicial, LocalDate dataFinal) {
 		List<Locacao> locacoes = locacaoRepository
 				.findByPlacaVeiculo(placa, dataInicial, dataFinal);
 		List<Reserva> reservas = reservaRepository

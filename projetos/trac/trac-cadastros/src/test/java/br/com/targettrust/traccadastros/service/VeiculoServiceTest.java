@@ -2,10 +2,7 @@ package br.com.targettrust.traccadastros.service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
 
-import br.com.targettrust.traccadastros.repositorio.LocacaoRepository;
-import br.com.targettrust.traccadastros.repositorio.ReservaRepository;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,6 +15,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import br.com.targettrust.traccadastros.entidades.Carro;
 import br.com.targettrust.traccadastros.entidades.Cliente;
 import br.com.targettrust.traccadastros.entidades.Funcionario;
+import br.com.targettrust.traccadastros.repositorio.LocacaoRepository;
+import br.com.targettrust.traccadastros.repositorio.ReservaRepository;
 import br.com.targettrust.traccadastros.util.TestObjectFactory;
 
 @RunWith(SpringRunner.class)
@@ -49,16 +48,16 @@ public class VeiculoServiceTest {
         Carro carro = testObjectFactory.createCarro();
 
         testObjectFactory.createLocacao(funcionario, cliente, carro,
-                Date.from(LocalDate.now().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant()),
-                Date.from(LocalDate.now().plusDays(2).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                LocalDate.now().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
+                LocalDate.now().plusDays(2).atStartOfDay(ZoneId.systemDefault()).toLocalDate());
         testObjectFactory.createReserva(
                 carro,
-                Date.from(LocalDate.now().plusDays(10).atStartOfDay(ZoneId.systemDefault()).toInstant()),
-                Date.from(LocalDate.now().plusDays(12).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                LocalDate.now().plusDays(10).atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
+                LocalDate.now().plusDays(12).atStartOfDay(ZoneId.systemDefault()).toLocalDate());
         //Act
         Boolean disponivel = veiculoService.veiculoEstaDisponivel(carro.getPlaca(),
-                Date.from(LocalDate.now().plusDays(5).atStartOfDay(ZoneId.systemDefault()).toInstant()),
-                Date.from(LocalDate.now().plusDays(6).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                LocalDate.now().plusDays(5).atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
+                LocalDate.now().plusDays(6).atStartOfDay(ZoneId.systemDefault()).toLocalDate());
         //Assert
         Assert.assertTrue(disponivel);
     }

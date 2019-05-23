@@ -2,7 +2,6 @@ package br.com.targettrust.traccadastros.repositorios;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 
 import org.hamcrest.Matchers;
@@ -51,13 +50,13 @@ public class ReservaRepositoryTest {
 	public void carroComReservaDeveRetornarUmaReserva() {
 		testObjectFactory.createReserva(
 				carro,
-				Date.from(LocalDate.now().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant()),
-				Date.from(LocalDate.now().plusDays(11).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+				LocalDate.now().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
+				LocalDate.now().plusDays(11).atStartOfDay(ZoneId.systemDefault()).toLocalDate());
 		// Act
 		List<Reserva> reservas = reservaRepository.findByPlacaVeiculo(
 				TestObjectFactory.PLACA_DEFAULT,
-				Date.from(LocalDate.now().plusDays(2).atStartOfDay(ZoneId.systemDefault()).toInstant()),
-				Date.from(LocalDate.now().plusDays(10).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+				LocalDate.now().plusDays(2).atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
+				LocalDate.now().plusDays(10).atStartOfDay(ZoneId.systemDefault()).toLocalDate());
 		// Assert
 		Assert.assertThat(reservas, Matchers.hasSize(1));
 	}
@@ -66,13 +65,13 @@ public class ReservaRepositoryTest {
 	public void carroComReservaForaDaDataDeveRetornarVazio() {
 		testObjectFactory.createReserva(
 				carro,
-				Date.from(LocalDate.now().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant()),
-				Date.from(LocalDate.now().plusDays(11).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+				LocalDate.now().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
+				LocalDate.now().plusDays(11).atStartOfDay(ZoneId.systemDefault()).toLocalDate());
 		// Act
 		List<Reserva> reservas = reservaRepository.findByPlacaVeiculo(
 				TestObjectFactory.PLACA_DEFAULT,
-				Date.from(LocalDate.now().plusDays(12).atStartOfDay(ZoneId.systemDefault()).toInstant()),
-				Date.from(LocalDate.now().plusDays(22).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+				LocalDate.now().plusDays(12).atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
+				LocalDate.now().plusDays(22).atStartOfDay(ZoneId.systemDefault()).toLocalDate());
 		// Assert
 		Assert.assertThat(reservas, Matchers.empty());
 	}

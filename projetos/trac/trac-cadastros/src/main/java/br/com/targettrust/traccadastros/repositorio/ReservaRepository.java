@@ -1,6 +1,6 @@
 package br.com.targettrust.traccadastros.repositorio;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -22,8 +22,8 @@ public interface ReservaRepository
 	       + "       :dataFinal between reserva.dataInicial and reserva.dataFinal )")
 	List<Reserva> findByPlacaVeiculo(
 			@Param("placa") String placa, 
-			@Param("dataInicial") Date dataInicial, 
-			@Param("dataFinal") Date dataFinal);
+			@Param("dataInicial") LocalDate dataInicial, 
+			@Param("dataFinal") LocalDate dataFinal);
 
 	@Query("delete Reserva reserva "+ 
 	       " where reserva.id in( "+ 

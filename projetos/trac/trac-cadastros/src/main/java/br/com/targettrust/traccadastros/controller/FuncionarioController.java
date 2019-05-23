@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.targettrust.traccadastros.entidades.Funcionario;
 import br.com.targettrust.traccadastros.entidades.Marca;
 import br.com.targettrust.traccadastros.entidades.Usuario;
-import br.com.targettrust.traccadastros.repositorio.MarcaRepository;
 import br.com.targettrust.traccadastros.repositorio.UsuarioRepository;
 
 @RestController

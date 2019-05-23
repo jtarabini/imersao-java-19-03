@@ -1,6 +1,6 @@
 package br.com.targettrust.traccadastros.entidades;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
@@ -43,7 +43,7 @@ public class Reserva extends Entidade{
 			shape=JsonFormat.Shape.STRING, 
 			pattern="dd.MM.yyyy HH:mm:ss",
 			timezone = "BRT")
-	private Date dataInicial;
+	private LocalDate dataInicial;
 	
 	@Column(name="dt_final")
 	@Future
@@ -52,7 +52,7 @@ public class Reserva extends Entidade{
 			shape=JsonFormat.Shape.STRING, 
 			pattern="dd.MM.yyyy HH:mm:ss",
 			timezone = "BRT")
-	private Date dataFinal;
+	private LocalDate dataFinal;
 	
 	@Column(name="dt_cancelamento")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -61,7 +61,7 @@ public class Reserva extends Entidade{
 			shape=JsonFormat.Shape.STRING, 
 			pattern="dd.MM.yyyy HH:mm:ss",
 			timezone = "BRT")
-	private Date dataCancelamento;
+	private LocalDate dataCancelamento;
 
 	@ManyToMany
 	@JoinTable(name = "rl_reserva_equipamento", 
@@ -93,27 +93,27 @@ public class Reserva extends Entidade{
 		this.veiculo = veiculo;
 	}
 
-	public Date getDataInicial() {
+	public LocalDate getDataInicial() {
 		return dataInicial;
 	}
 
-	public void setDataInicial(Date dataInicial) {
+	public void setDataInicial(LocalDate dataInicial) {
 		this.dataInicial = dataInicial;
 	}
 
-	public Date getDataFinal() {
+	public LocalDate getDataFinal() {
 		return dataFinal;
 	}
 
-	public void setDataFinal(Date dataFinal) {
+	public void setDataFinal(LocalDate dataFinal) {
 		this.dataFinal = dataFinal;
 	}
 
-	public Date getDataCancelamento() {
+	public LocalDate getDataCancelamento() {
 		return dataCancelamento;
 	}
 
-	public void setDataCancelamento(Date dataCancelamento) {
+	public void setDataCancelamento(LocalDate dataCancelamento) {
 		this.dataCancelamento = dataCancelamento;
 	}
 
