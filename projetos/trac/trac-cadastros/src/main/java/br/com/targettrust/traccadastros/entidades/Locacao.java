@@ -1,21 +1,10 @@
 package br.com.targettrust.traccadastros.entidades;
 
-import java.time.LocalDate;
-import java.util.Set;
-
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
+import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name="tb_locacao")
@@ -37,12 +26,10 @@ public class Locacao extends Entidade{
 	private Funcionario funcionario;
 	
 	@Column(name="dt_inicio")
-	@Temporal(TemporalType.TIMESTAMP)
 	@FutureOrPresent
 	private LocalDate dataInicial;
 	
 	@Column(name="dt_fim")
-	@Temporal(TemporalType.TIMESTAMP)
 	@Future
 	private LocalDate dataFinal;
 	

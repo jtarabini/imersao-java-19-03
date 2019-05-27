@@ -24,8 +24,8 @@ public interface LocacaoRepository
 	       "order by locacao.dataInicial ")
 	List<Locacao> findByFuncionario(
 			@Param("funcionario") Funcionario funcionario,
-			@Param("dataInicial") Date dataInicial,
-			@Param("dataFinal") Date dataFinal);
+			@Param("dataInicial") LocalDate dataInicial,
+			@Param("dataFinal") LocalDate dataFinal);
 
 
 	@Query("  from Locacao locacao "+ 
