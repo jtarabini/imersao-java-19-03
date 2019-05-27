@@ -3,7 +3,6 @@ package br.com.targettrust.traccadastros.controller;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;

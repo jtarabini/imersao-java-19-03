@@ -1,11 +1,23 @@
 package br.com.targettrust.traccadastros.util;
 
-import br.com.targettrust.traccadastros.entidades.*;
-import br.com.targettrust.traccadastros.repositorio.*;
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import br.com.targettrust.traccadastros.entidades.Carro;
+import br.com.targettrust.traccadastros.entidades.Cliente;
+import br.com.targettrust.traccadastros.entidades.Funcionario;
+import br.com.targettrust.traccadastros.entidades.Locacao;
+import br.com.targettrust.traccadastros.entidades.Marca;
+import br.com.targettrust.traccadastros.entidades.Modelo;
+import br.com.targettrust.traccadastros.entidades.Reserva;
+import br.com.targettrust.traccadastros.repositorio.LocacaoRepository;
+import br.com.targettrust.traccadastros.repositorio.MarcaRepository;
+import br.com.targettrust.traccadastros.repositorio.ModeloRepository;
+import br.com.targettrust.traccadastros.repositorio.ReservaRepository;
+import br.com.targettrust.traccadastros.repositorio.UsuarioRepository;
+import br.com.targettrust.traccadastros.repositorio.VeiculoRepository;
 
 @Service
 public class TestObjectFactory {
@@ -30,7 +42,7 @@ public class TestObjectFactory {
     private MarcaRepository marcaRepository;
 
 
-    public Reserva createReserva(Carro carro, Date dataInicial, Date dataFinal) {
+    public Reserva createReserva(Carro carro, LocalDate dataInicial, LocalDate dataFinal) {
         Reserva reserva = new Reserva();
         reserva.setDataInicial(dataInicial);
         reserva.setDataFinal(dataFinal);
@@ -40,8 +52,8 @@ public class TestObjectFactory {
         return this.reservaRepository.save(reserva);
     }
 
-    public void createLocacao(Funcionario funcionario, Cliente cliente, Carro carro, Date dataInicial,
-                               Date dataFinal) {
+    public void createLocacao(Funcionario funcionario, Cliente cliente, Carro carro, LocalDate dataInicial,
+                               LocalDate dataFinal) {
         Locacao locacao = new Locacao();
         locacao.setCliente(cliente);
         locacao.setVeiculo(carro);

@@ -1,25 +1,14 @@
 package br.com.targettrust.traccadastros.entidades;
 
-import java.util.Date;
-import java.util.Set;
-
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name="tb_locacao")
@@ -44,16 +33,14 @@ public class Locacao extends Entidade{
 	private Funcionario funcionario;
 	
 	@Column(name="dt_inicio")
-	@Temporal(TemporalType.TIMESTAMP)
 	@FutureOrPresent
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
-	private Date dataInicial;
+	private LocalDate dataInicial;
 	
 	@Column(name="dt_fim")
-	@Temporal(TemporalType.TIMESTAMP)
 	@Future
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
-	private Date dataFinal;
+	private LocalDate dataFinal;
 	
 	@Column(name="vlr_pago")
 	@NotNull
@@ -90,19 +77,19 @@ public class Locacao extends Entidade{
 		this.funcionario = funcionario;
 	}
 
-	public Date getDataInicial() {
+	public LocalDate getDataInicial() {
 		return dataInicial;
 	}
 
-	public void setDataInicial(Date dataInicial) {
+	public void setDataInicial(LocalDate dataInicial) {
 		this.dataInicial = dataInicial;
 	}
 
-	public Date getDataFinal() {
+	public LocalDate getDataFinal() {
 		return dataFinal;
 	}
 
-	public void setDataFinal(Date dataFinal) {
+	public void setDataFinal(LocalDate dataFinal) {
 		this.dataFinal = dataFinal;
 	}
 

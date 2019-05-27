@@ -35,19 +35,19 @@ public class LocacaoRepositoryTest {
 		Cliente cliente = testObjectFactory.createCliente();
 		Carro carro = testObjectFactory.createCarro();
 		testObjectFactory.createLocacao(funcionario, cliente, carro,
-				Date.from(LocalDate.now().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant()),
-				Date.from(LocalDate.now().plusDays(2).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+				LocalDate.now().plusDays(1).atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
+				LocalDate.now().plusDays(2).atStartOfDay(ZoneId.systemDefault()).toLocalDate());
 		testObjectFactory.createLocacao(funcionario, cliente, carro,
-				Date.from(LocalDate.now().plusDays(3).atStartOfDay(ZoneId.systemDefault()).toInstant()),
-				Date.from(LocalDate.now().plusDays(4).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+				LocalDate.now().plusDays(3).atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
+				LocalDate.now().plusDays(4).atStartOfDay(ZoneId.systemDefault()).toLocalDate());
 		testObjectFactory.createLocacao(funcionario, cliente, carro,
-				Date.from(LocalDate.now().plusDays(5).atStartOfDay(ZoneId.systemDefault()).toInstant()),
-				Date.from(LocalDate.now().plusDays(6).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+				LocalDate.now().plusDays(5).atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
+				LocalDate.now().plusDays(6).atStartOfDay(ZoneId.systemDefault()).toLocalDate());
 		//Act
 		List<Locacao> locacoes = locacaoRepository
 				.findByFuncionario(funcionario,
-						Date.from(LocalDate.now().plusDays(3).atStartOfDay(ZoneId.systemDefault()).toInstant()),
-						Date.from(LocalDate.now().plusDays(7).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+						LocalDate.now().plusDays(3).atStartOfDay(ZoneId.systemDefault()).toLocalDate(),
+						LocalDate.now().plusDays(7).atStartOfDay(ZoneId.systemDefault()).toLocalDate());
 		//Assert
 		Assert.assertThat(locacoes, Matchers.notNullValue());
 		Assert.assertThat(locacoes.size(), Matchers.equalTo(2));
