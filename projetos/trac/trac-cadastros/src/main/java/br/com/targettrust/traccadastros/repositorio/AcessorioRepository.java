@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import br.com.targettrust.traccadastros.entidades.Acessorio;
+import br.com.targettrust.traccadastros.entidades.Marca;
 
 import java.util.List;
 import java.util.Optional;
