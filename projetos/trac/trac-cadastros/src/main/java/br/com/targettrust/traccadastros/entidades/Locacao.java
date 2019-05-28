@@ -15,6 +15,7 @@ import java.util.Set;
 @AttributeOverrides({
 	@AttributeOverride(name="versao", column=@Column(name="loc_versao"))
 })
+@SequenceGenerator(name = "sequence_generator", sequenceName = "sq_locacao", allocationSize = 1)
 public class Locacao extends Entidade{
 	
 	@ManyToOne

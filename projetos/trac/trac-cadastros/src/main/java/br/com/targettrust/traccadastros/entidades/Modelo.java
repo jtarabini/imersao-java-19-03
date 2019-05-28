@@ -5,6 +5,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_modelo")
+@AttributeOverrides({
+		@AttributeOverride(name="versao", column=@Column(name="mdl_versao"))
+})
+@SequenceGenerator(name = "sequence_generator", sequenceName = "sq_modelo", allocationSize = 1)
 public class Modelo extends Entidade{
 	
 	@Column(name="mdl_nome")

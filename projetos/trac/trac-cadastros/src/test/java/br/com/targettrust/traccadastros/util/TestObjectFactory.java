@@ -60,6 +60,7 @@ public class TestObjectFactory {
         locacao.setFuncionario(funcionario);
         locacao.setDataInicial(dataInicial);
         locacao.setDataFinal(dataFinal);
+        locacao.setValor(100D);
         locacao.setId(locacaoRepository.save(locacao).getId());
     }
 

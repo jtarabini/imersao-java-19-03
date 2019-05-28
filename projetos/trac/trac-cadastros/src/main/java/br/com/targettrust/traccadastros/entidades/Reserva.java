@@ -13,6 +13,7 @@ import java.util.Set;
 @AttributeOverrides({
         @AttributeOverride(name = "versao", column = @Column(name = "rsv_versao"))
 })
+@SequenceGenerator(name = "sequence_generator", sequenceName = "sq_reserva", allocationSize = 1)
 public class Reserva extends Entidade {
 
     @ManyToOne
