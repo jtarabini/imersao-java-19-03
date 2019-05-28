@@ -1,5 +1,6 @@
 package br.com.targettrust.traccadastros.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.validation.constraints.Future;
@@ -21,10 +22,10 @@ public class LocacaoDto {
 	private Funcionario funcionario;
 	@FutureOrPresent
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
-	private Date dataInicial;
+	private LocalDate dataInicial;
 	@Future
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
-	private Date dataFinal;
+	private LocalDate dataFinal;
 	private Double valor;
 	
 	public Long getIdVeiculo() {
@@ -45,16 +46,16 @@ public class LocacaoDto {
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}
-	public Date getDataInicial() {
+	public LocalDate getDataInicial() {
 		return dataInicial;
 	}
-	public void setDataInicial(Date dataInicial) {
+	public void setDataInicial(LocalDate dataInicial) {
 		this.dataInicial = dataInicial;
 	}
-	public Date getDataFinal() {
+	public LocalDate getDataFinal() {
 		return dataFinal;
 	}
-	public void setDataFinal(Date dataFinal) {
+	public void setDataFinal(LocalDate dataFinal) {
 		this.dataFinal = dataFinal;
 	}
 	public Double getValor() {

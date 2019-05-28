@@ -20,7 +20,7 @@ public class VeiculoService {
 	private LocacaoRepository locacaoRepository;
 	
 	public Boolean veiculoEstaDisponivel(Long id, 
-			Date dataInicial, Date dataFinal) {
+			LocalDate dataInicial, LocalDate dataFinal) {
 		List<Locacao> locacoes = locacaoRepository
 				.findByIdVeiculo(id, dataInicial, dataFinal);
 		List<Reserva> reservas = reservaRepository

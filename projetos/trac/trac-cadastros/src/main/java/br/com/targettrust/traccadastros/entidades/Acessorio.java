@@ -2,13 +2,14 @@ package br.com.targettrust.traccadastros.entidades;
 
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="tb_acessorio")
+@AttributeOverrides({
+		@AttributeOverride(name="versao", column=@Column(name="acs_versao"))
+})
+@SequenceGenerator(name = "sequence_generator", sequenceName = "sq_acessorio", allocationSize = 1)
 public class Acessorio extends Entidade {
 	
 	@Column(name="acs_descricao")

@@ -9,9 +9,9 @@ import javax.persistence.Version;
 
 @MappedSuperclass
 public class Entidade {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_generator")
 	private Long id;
 
 	@Version

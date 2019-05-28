@@ -46,8 +46,8 @@ public interface LocacaoRepository
 	       + "       :dataFinal between locacao.dataInicial and locacao.dataFinal )")
 	List<Locacao> findByIdVeiculo(
 			@Param("id") Long id, 
-			@Param("dataInicial") Date dataInicial, 
-			@Param("dataFinal") Date dataFinal);
+			@Param("dataInicial") LocalDate dataInicial,
+			@Param("dataFinal") LocalDate dataFinal);
 
 	@Transactional
 	@Modifying

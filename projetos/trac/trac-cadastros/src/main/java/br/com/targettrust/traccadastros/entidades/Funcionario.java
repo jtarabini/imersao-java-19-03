@@ -1,10 +1,6 @@
 package br.com.targettrust.traccadastros.entidades;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="tb_funcionario")
@@ -14,6 +10,7 @@ import javax.persistence.Table;
 	@AttributeOverride(name="nome", column = @Column(name="fnc_nome")),
 	@AttributeOverride(name="versao", column=@Column(name="fnc_versao"))
 })
+@SequenceGenerator(name = "sequence_generator", sequenceName = "sq_funcionario", allocationSize = 1)
 public class Funcionario extends Usuario{
 	
 	@Column(name="fnc_matricula", length=10)
