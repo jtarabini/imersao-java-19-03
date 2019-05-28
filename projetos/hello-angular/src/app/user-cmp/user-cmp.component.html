@@ -1,0 +1,28 @@
+<p>
+  {{ user.firstName }} 
+  {{ user.middleName }} 
+  {{ user.lastName }}
+</p>
+<span *ngIf="selectedUser !== undefined">
+  <input type="text" 
+    [(ngModel)]="selectedUser.firstName"/>
+</span>
+
+<table border="1" style="width: 100%">
+  <thead>
+    <th>First Name</th>
+    <th>Middle Name</th>
+    <th>Last Name</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of userList">
+      <td>
+        <a href="#" (click)="selectUser(user)" >
+          {{user.firstName}}
+        </a> 
+      </td>
+      <td>{{user.middleName}}</td>
+      <td>{{user.lastName}}</td>
+    </tr>
+  </tbody>
+</table>
