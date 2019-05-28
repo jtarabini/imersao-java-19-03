@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.targettrust.traccadastros.entidades.Acessorio;
-import br.com.targettrust.traccadastros.entidades.Modelo;
 import br.com.targettrust.traccadastros.repositorio.AcessorioRepository;
 
 @RestController
@@ -62,14 +61,6 @@ public class AcessorioController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		
-	}
-	@GetMapping("/search")
-	public HttpEntity<List<Acessorio>> search(
-			@RequestParam(name="id", required=false) Long id, 
-			@RequestParam(name="descricao", required=false) String descricao)	 {
-		System.out.println(id);
-		System.out.println(descricao);
-		return ResponseEntity.ok(acessorioRepository.search(id, descricao));
 	}
 }
 

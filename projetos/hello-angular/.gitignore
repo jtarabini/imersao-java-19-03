@@ -1,19 +1,4 @@
-.classpath
-.project
-/.iml
-.gradle/
-gradle/
-classes/
-out/
-.idea/
-build/
-target/
-bin/
-/gradlew
-**/.DS_Store
-**/.settings
-.metadata/
-.recommenders/
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
 /dist
