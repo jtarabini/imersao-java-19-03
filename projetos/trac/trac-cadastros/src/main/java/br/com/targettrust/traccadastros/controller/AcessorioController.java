@@ -29,6 +29,17 @@ public class AcessorioController {
 	public HttpEntity<List<Acessorio>> listAll(){
 		return ResponseEntity.ok(acessorioRepository.findAll());		
 	}
+	
+	@GetMapping("/search")
+	public HttpEntity<List<Acessorio>> search(
+			@RequestParam(name="id", required = false) Long id, 
+			@RequestParam(name="descricao", required = false) String descricao) {
+		List<Acessorio> acessorios = 
+				acessorioRepository.search(id, descricao);
+		return acessorios == null || acessorios.isEmpty() ?
+				ResponseEntity.noContent().build() : 
+					ResponseEntity.ok(acessorios); 
+	}
 
 	@GetMapping("/descricao/{descricao}")
 	public HttpEntity<Acessorio> findByDescricao(@PathVariable("descricao") String descricao){

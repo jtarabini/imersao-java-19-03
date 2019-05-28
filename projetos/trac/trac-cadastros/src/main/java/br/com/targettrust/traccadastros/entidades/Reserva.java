@@ -1,116 +1,116 @@
 package br.com.targettrust.traccadastros.entidades;
 
-import java.util.Date;
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.PastOrPresent;
+import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
-@Table(name="tb_reserva")
+@Table(name = "tb_reserva")
 @AttributeOverrides({
-	@AttributeOverride(name="versao", column=@Column(name="rsv_versao"))
+        @AttributeOverride(name = "versao", column = @Column(name = "rsv_versao"))
 })
-public class Reserva extends Entidade{
-	
-	@ManyToOne
-	@JoinColumn(name="id_cliente")
-	private Cliente cliente;
-	@ManyToOne
-	@JoinColumn(name="id_funcionario")
-	private Funcionario funcionario;
-	@ManyToOne
-	@JoinColumn(name="id_veiculo")	
-	private Veiculo veiculo;
-	
-	@Column(name="dt_inicial")
-	@Temporal(TemporalType.TIMESTAMP)
-	@Future
-	private Date dataInicial;
-	
-	@Column(name="dt_final")
-	@Future
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataFinal;
-	
-	@Column(name="dt_cancelamento")
-	@Temporal(TemporalType.TIMESTAMP)
-	@PastOrPresent
-	private Date dataCancelamento;
+@SequenceGenerator(name = "sequence_generator", sequenceName = "sq_reserva", allocationSize = 1)
+public class Reserva extends Entidade {
 
-	@ManyToMany
-	@JoinTable(name = "rl_reserva_equipamento", 
-		inverseJoinColumns = {@JoinColumn(name = "id_equipamento", referencedColumnName = "id") }, 
-		joinColumns = {@JoinColumn(name = "id_reserva", referencedColumnName = "id") } )
-	private Set<Equipamento> equipamentos;
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
+    @ManyToOne
+    @JoinColumn(name = "id_funcionario")
+    private Funcionario funcionario;
+    @ManyToOne
+    @JoinColumn(name = "id_veiculo")
+    private Veiculo veiculo;
 
-	public Cliente getCliente() {
-		return cliente;
-	}
+    @Column(name = "dt_inicial")
+    @Future
+    @JsonFormat(
+            shape = JsonFormat.Shape.STRING,
+            pattern = "dd.MM.yyyy HH:mm:ss",
+            timezone = "BRT")
+    private LocalDate dataInicial;
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
+    @Column(name = "dt_final")
+    @Future
+    @JsonFormat(
+            shape = JsonFormat.Shape.STRING,
+            pattern = "dd.MM.yyyy HH:mm:ss",
+            timezone = "BRT")
+    private LocalDate dataFinal;
 
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
+    @Column(name = "dt_cancelamento")
+    @PastOrPresent
+    @JsonFormat(
+            shape = JsonFormat.Shape.STRING,
+            pattern = "dd.MM.yyyy HH:mm:ss",
+            timezone = "BRT")
+    private LocalDate dataCancelamento;
 
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
-	}
+    @ManyToMany
+    @JoinTable(name = "rl_reserva_equipamento",
+            inverseJoinColumns = {@JoinColumn(name = "id_equipamento", referencedColumnName = "id")},
+            joinColumns = {@JoinColumn(name = "id_reserva", referencedColumnName = "id")})
+    private Set<Equipamento> equipamentos;
 
-	public Veiculo getVeiculo() {
-		return veiculo;
-	}
+    public Cliente getCliente() {
+        return cliente;
+    }
 
-	public void setVeiculo(Veiculo veiculo) {
-		this.veiculo = veiculo;
-	}
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
-	public Date getDataInicial() {
-		return dataInicial;
-	}
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
 
-	public void setDataInicial(Date dataInicial) {
-		this.dataInicial = dataInicial;
-	}
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
 
-	public Date getDataFinal() {
-		return dataFinal;
-	}
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
 
-	public void setDataFinal(Date dataFinal) {
-		this.dataFinal = dataFinal;
-	}
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
 
-	public Date getDataCancelamento() {
-		return dataCancelamento;
-	}
+    public LocalDate getDataInicial() {
+        return dataInicial;
+    }
 
-	public void setDataCancelamento(Date dataCancelamento) {
-		this.dataCancelamento = dataCancelamento;
-	}
+    public void setDataInicial(LocalDate dataInicial) {
+        this.dataInicial = dataInicial;
+    }
 
-	public Set<Equipamento> getEquipamentos() {
-		return equipamentos;
-	}
+    public LocalDate getDataFinal() {
+        return dataFinal;
+    }
 
-	public void setEquipamentos(Set<Equipamento> equipamentos) {
-		this.equipamentos = equipamentos;
-	}
-	
-	
+    public void setDataFinal(LocalDate dataFinal) {
+        this.dataFinal = dataFinal;
+    }
+
+    public LocalDate getDataCancelamento() {
+        return dataCancelamento;
+    }
+
+    public void setDataCancelamento(LocalDate dataCancelamento) {
+        this.dataCancelamento = dataCancelamento;
+    }
+
+    public Set<Equipamento> getEquipamentos() {
+        return equipamentos;
+    }
+
+    public void setEquipamentos(Set<Equipamento> equipamentos) {
+        this.equipamentos = equipamentos;
+    }
+
 
 }

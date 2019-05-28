@@ -1,10 +1,6 @@
 package br.com.targettrust.traccadastros.entidades;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 @Entity
@@ -14,8 +10,8 @@ import javax.validation.constraints.Email;
 	@AttributeOverride(name="senha", column = @Column(name="cli_senha")),
 	@AttributeOverride(name="nome", column = @Column(name="cli_nome")),
 	@AttributeOverride(name="versao", column=@Column(name="cli_versao"))
-
 })
+@SequenceGenerator(name = "sequence_generator", sequenceName = "sq_cliente", allocationSize = 1)
 public class Cliente extends Usuario {
 	
 	@Column(name="cli_endereco")

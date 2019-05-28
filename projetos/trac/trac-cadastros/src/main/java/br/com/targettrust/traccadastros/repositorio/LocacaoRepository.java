@@ -1,5 +1,6 @@
 package br.com.targettrust.traccadastros.repositorio;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -23,8 +24,8 @@ public interface LocacaoRepository
 	       "order by locacao.dataInicial ")
 	List<Locacao> findByFuncionario(
 			@Param("funcionario") Funcionario funcionario,
-			@Param("dataInicial") Date dataInicial,
-			@Param("dataFinal") Date dataFinal);
+			@Param("dataInicial") LocalDate dataInicial,
+			@Param("dataFinal") LocalDate dataFinal);
 
 
 	@Query("  from Locacao locacao "+ 
@@ -34,8 +35,19 @@ public interface LocacaoRepository
 	       + "       :dataFinal between locacao.dataInicial and locacao.dataFinal )")
 	List<Locacao> findByPlacaVeiculo(
 			@Param("placa") String placa, 
-			@Param("dataInicial") Date dataInicial, 
-			@Param("dataFinal") Date dataFinal);
+			@Param("dataInicial") LocalDate dataInicial, 
+			@Param("dataFinal") LocalDate dataFinal);
+
+
+	@Query("  from Locacao locacao "+ 
+	       " where locacao.veiculo.id = :id "
+	       + " and ( :dataInicial between locacao.dataInicial and locacao.dataFinal "
+	       + "       OR"
+	       + "       :dataFinal between locacao.dataInicial and locacao.dataFinal )")
+	List<Locacao> findByIdVeiculo(
+			@Param("id") Long id, 
+			@Param("dataInicial") LocalDate dataInicial,
+			@Param("dataFinal") LocalDate dataFinal);
 
 	@Transactional
 	@Modifying

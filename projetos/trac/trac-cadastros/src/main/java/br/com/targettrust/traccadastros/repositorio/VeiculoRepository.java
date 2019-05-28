@@ -1,5 +1,7 @@
 package br.com.targettrust.traccadastros.repositorio;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -32,4 +34,9 @@ public interface VeiculoRepository extends JpaRepository<Veiculo, Long>{
 	@Transactional
 	@Modifying
 	void deleteByMarca(@Param("marca") String marca);
+
+	@Query(" select e "
+			+ "   from Veiculo e "
+			+ "where e.modelo.id = :modeloId")
+	List<Veiculo> findByModelo(@Param("modeloId") Long id);
 }

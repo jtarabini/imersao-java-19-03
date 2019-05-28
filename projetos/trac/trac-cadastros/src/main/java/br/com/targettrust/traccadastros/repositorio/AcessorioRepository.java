@@ -20,11 +20,11 @@ public interface AcessorioRepository extends JpaRepository<Acessorio, Long>{
 	@Transactional
 	Optional<Acessorio> findByDescricao(String descricao);
 
-	@Query("   select marca "
-			+ "  from Marca marca "
-			+ " where (:id is null or marca.id = :id )"
-			+ "   and (:nome is null or marca.nome = :nome )")
-	List<Marca> search(
-			@Param("id") Long id, 
-			@Param("nome") String nome);
+	@Query("  select e "
+			+ " from Acessorio e "
+			+ "where (:id is null or e.id = :id) "
+			+ "  and (:descricao is null or e.descricao = :descricao )")
+	List<Acessorio> search(@Param("id") Long id, 
+			@Param("descricao")String descricao);
+
 }

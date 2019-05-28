@@ -1,52 +1,51 @@
 package br.com.targettrust.traccadastros.entidades;
 
-import java.util.Date;
-import java.util.Set;
-
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name="tb_locacao")
 @AttributeOverrides({
 	@AttributeOverride(name="versao", column=@Column(name="loc_versao"))
 })
+@SequenceGenerator(name = "sequence_generator", sequenceName = "sq_locacao", allocationSize = 1)
 public class Locacao extends Entidade{
 	
 	@ManyToOne
 	@JoinColumn(name="id_veiculo")
+	@NotNull
 	private Veiculo veiculo;
 	
 	@ManyToOne
 	@JoinColumn(name="id_cliente")
+	@NotNull
 	private Cliente cliente;
 	
 	@ManyToOne
 	@JoinColumn(name="id_funcionario")
+	@NotNull
 	private Funcionario funcionario;
 	
 	@Column(name="dt_inicio")
-	@Temporal(TemporalType.TIMESTAMP)
 	@FutureOrPresent
-	private Date dataInicial;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+	private LocalDate dataInicial;
 	
 	@Column(name="dt_fim")
-	@Temporal(TemporalType.TIMESTAMP)
 	@Future
-	private Date dataFinal;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+	private LocalDate dataFinal;
 	
 	@Column(name="vlr_pago")
+	@NotNull
+	@Min(1)
 	private Double valor;
 
 	@ManyToMany
@@ -79,19 +78,19 @@ public class Locacao extends Entidade{
 		this.funcionario = funcionario;
 	}
 
-	public Date getDataInicial() {
+	public LocalDate getDataInicial() {
 		return dataInicial;
 	}
 
-	public void setDataInicial(Date dataInicial) {
+	public void setDataInicial(LocalDate dataInicial) {
 		this.dataInicial = dataInicial;
 	}
 
-	public Date getDataFinal() {
+	public LocalDate getDataFinal() {
 		return dataFinal;
 	}
 
-	public void setDataFinal(Date dataFinal) {
+	public void setDataFinal(LocalDate dataFinal) {
 		this.dataFinal = dataFinal;
 	}
 
