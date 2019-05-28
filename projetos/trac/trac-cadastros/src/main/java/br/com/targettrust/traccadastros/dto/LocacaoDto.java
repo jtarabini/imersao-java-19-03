@@ -1,7 +1,6 @@
 package br.com.targettrust.traccadastros.dto;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
