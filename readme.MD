@@ -103,5 +103,7 @@ Este repositório contém o conteúdo passado durante as aulas e exercícios pro
       * Iterando sobre listas
       * Importando módulos
     * [30/05/2019](./aulas/2019_05_30.MD)
-      * 
+      * Integrando Frontend com API Rest
+      * Angular services
+      * Http client
 
