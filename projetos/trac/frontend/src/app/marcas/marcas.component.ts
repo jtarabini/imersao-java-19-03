@@ -26,7 +26,14 @@ export class MarcasComponent implements OnInit {
   }
 
   select(entity) {
+    console.log('clicou no select');
     this.selectedEntity = entity;
+  }
+
+  save() {
+    console.log('clicou no save');
+    this.marcasService.save(this.selectedEntity)
+      .subscribe( marca => this.selectedEntity = marca);
   }
 
 }
