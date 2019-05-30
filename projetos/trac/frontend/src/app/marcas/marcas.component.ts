@@ -8,12 +8,14 @@ import { MarcaService } from '../services/marca.service'
   templateUrl: './marcas.component.html',
   styleUrls: ['./marcas.component.css']
 })
-export class MarcasComponent implements OnInit {
+export class MarcasComponent 
+  implements OnInit {
 
   entities : Marca[];
   selectedEntity : Marca;
 
-  constructor(private marcaService : MarcaService) { }
+  constructor(
+    private marcaService : MarcaService) { }
 
   ngOnInit() {
     this.getMarcas();
@@ -21,11 +23,22 @@ export class MarcasComponent implements OnInit {
 
   getMarcas() {
     this.marcaService.getMarcas()
-      .subscribe( marcas => this.entities = marcas );
+      .subscribe( marcas => 
+        this.entities = marcas );
   }
 
   select(entity) {
     this.selectedEntity = entity;
+  }
+
+  cancel() {
+    this.selectedEntity = null;
+  }
+
+  save() {
+    this.marcaService.save(this.selectedEntity)
+      .subscribe( marca => alert('Marca salva com sucesso'));
+    this.cancel();
   }
 
 }
