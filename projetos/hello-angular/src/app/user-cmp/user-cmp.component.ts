@@ -14,9 +14,9 @@ export class UserCmpComponent
       lastName : "Souza"
     },
     { 
-      firstName : "Simoni ", 
-      middleName : "Scudero",
-      lastName : "Kowalsky"
+      firstName : "Simone", 
+      middleName : "Leal",
+      lastName : "kosmalski"
     },
     { 
       firstName : "Carmem", 

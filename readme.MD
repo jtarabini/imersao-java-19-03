@@ -85,3 +85,23 @@ Este repositório contém o conteúdo passado durante as aulas e exercícios pro
       * Tratamento de exceptions
       * DTO
       * Date parsing
+    * [23/05/2019](./aulas/2019_05_23.MD): 
+      * Front end
+      * SPA - *Single Page Application*
+      * Angular JS
+        * Configuração de ambiente
+        * Pré-requisitos
+        * Instalação do Angular CLI
+        * Criação da primeira aplicação
+        * Criação de componentes
+* Semana 12
+    * [28/05/2019](./aulas/2019_05_28.MD)
+      * Criação do primeiro componente
+      * Two-way Data Binding
+      * Edição de valores
+      * Criação de classes de modelo
+      * Iterando sobre listas
+      * Importando módulos
+    * [30/05/2019](./aulas/2019_05_30.MD)
+      * 
+
