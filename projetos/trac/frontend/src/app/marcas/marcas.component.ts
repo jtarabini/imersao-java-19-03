@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Marca } from '../entidades/marca';
 import { MARCAS } from '../mock/marcas-mock';
+import { MarcasService } from '../services/marcas.service';
 
 @Component({
   selector: 'app-marcas',
@@ -12,10 +13,16 @@ export class MarcasComponent implements OnInit {
   entities : Marca[];
   selectedEntity : Marca;
 
-  constructor() { }
+  constructor(private marcasService : MarcasService) { }
 
   ngOnInit() {
-    this.entities = MARCAS;
+    this.getMarcas();
+  }
+
+  getMarcas() {
+    this.marcasService.getMarcas().subscribe(
+      marcas => this.entities = marcas
+    );
   }
 
   select(entity) {
