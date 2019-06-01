@@ -1,0 +1,17 @@
+<h2>Marcas</h2>
+<ul>
+  <li *ngFor="let entity of entities" >
+    <a href="#" (click)=select(entity)>{{entity.id}}. {{entity.nome}}</a>
+  </li>
+</ul>
+
+<div *ngIf="selectedEntity" >
+  <h3>Edição de Marca</h3>
+  <label>
+    Nome: 
+    <input type="text" placeholder="Nome" [(ngModel)]="selectedEntity.nome"/>
+  </label>
+  <br/>
+  <button (click)=save()>OK</button>
+  <button (click)=cancel()>Cancelar</button>
+</div>

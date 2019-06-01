@@ -6,7 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'TRAC';
-  subtitle = 'TargetTrust Rent A Car';
-  version = 1;
+  title = 'frontend';
 }
