@@ -1,7 +1,7 @@
 # Ramificação (Branching) no Git - Rebase
 
 ## Rebasing
-No Git, existem duas maneiras principais de integrar mudanças de um branch em outro: o merge e o rebase. Nessa seção você aprenderá o que é rebase, como fazê-lo, por que é uma ferramenta sensacional, e em quais casos você não deve usá-la.
+No Git, existem duas maneiras principais de integrar mudanças de um branch em outro: o `merge` e o `rebase`. Nessa seção você aprenderá o que é rebase, como fazê-lo, por que é uma ferramenta sensacional, e em quais casos você não deve usá-la.
 
 ### O Rebase Básico
 Se você voltar para o exemplo anterior na seção de merge (veja figura abaixo), você pode ver que você criou uma divergência no seu trabalho e fez commits em dois branches diferentes.
@@ -9,7 +9,7 @@ Se você voltar para o exemplo anterior na seção de merge (veja figura abaixo)
 
 ![Divergência inicial no seu histórico de commits](../imagens/18333fig0327-tn.png  "Divergência inicial no seu histórico de commits")
 
-A maneira mais fácil de integrar os branches, como já falamos, é o comando merge. Ele executa um merge de três vias entre os dois últimos snapshots (cópias em um determinado ponto no tempo) dos branches (C3 e C4) e o mais recente ancestral comum aos dois (C2), criando um novo snapshot (e um commit), como é mostrado abaixo.
+A maneira mais fácil de integrar os branches, como já falamos, é o comando `merge`. Ele executa um merge de três vias entre os dois últimos snapshots (cópias em um determinado ponto no tempo) dos branches (C3 e C4) e o mais recente ancestral comum aos dois (C2), criando um novo snapshot (e um commit), como é mostrado abaixo:
 
 ![Fazendo o merge de um branch para integrar o trabalho divergente](../imagens/18333fig0328-tn.png  "Fazendo o merge de um branch para integrar o trabalho divergente")
 
@@ -39,8 +39,8 @@ Constantemente você fará isso para garantir que seus commits sejam feitos de f
 
 Note que o snapshot apontado pelo o commit final, o último commit dos que vieram no rebase ou o último commit depois do merge, são o mesmo snapshot — somente o histórico é diferente. Fazer o rebase reproduz mudanças de uma linha de trabalho para outra na ordem em que foram feitas, já que o merge pega os pontos e os une.
 
-###Rebases Mais Interessantes
-Você também pode fazer o rebase em um local diferente do branch de rebase. Veja o histórico na Figura 3-31, por exemplo. Você criou um branch tópico (server) no seu projeto para adicionar uma funcionalidade no lado servidor e fez o commit. Então, você criou outro branch para fazer mudanças no lado cliente (client) e fez alguns commits. Finalmente, você voltou ao ser branch server e fez mais alguns commits.
+### Rebases Mais Interessantes
+Você também pode fazer o rebase em um local diferente do branch de rebase. Veja o histórico na figura abaixo, por exemplo. Você criou um branch tópico (server) no seu projeto para adicionar uma funcionalidade no lado servidor e fez o commit. Então, você criou outro branch para fazer mudanças no lado cliente (client) e fez alguns commits. Finalmente, você voltou ao ser branch server e fez mais alguns commits.
 
 
 ![Histórico com um branch tópico a partir de outro](../imagens/18333fig0331-tn.png  "Histórico com um branch tópico a partir de outro")
