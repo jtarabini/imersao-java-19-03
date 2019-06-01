@@ -28,7 +28,7 @@ Ele vai ao ancestral comum dos dois branches (no que você está e no qual será
 ![Fazendo o rebase em C4 de mudanças feitas em C3.](../imagens/18333fig0329-tn.png  "Fazendo o rebase em C4 de mudanças feitas em C3.")
 
 
-Nesse ponto, você pode ir ao branch master e fazer um merge fast-forward (Figura 3-30).
+Nesse ponto, você pode ir ao branch master e fazer um merge fast-forward.
 
 
 ![Fazendo um fast-forward no branch master](../imagens/18333fig0330-tn.png  "Fazendo um fast-forward no branch master")
@@ -53,7 +53,7 @@ Isto basicamente diz, "Faça o checkout do branch client, verifique as mudanças
 
 ![Fazendo o rebase de um branch tópico em outro](../imagens/18333fig0332-tn.png  "Fazendo o rebase de um branch tópico em outro")
 
-Agora você pode avançar (fast-forward) seu branch master (veja Figura 3-33):
+Agora você pode avançar (fast-forward) seu branch master:
 ```
 $ git checkout master
 $ git merge client
