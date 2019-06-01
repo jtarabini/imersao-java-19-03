@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -45,7 +47,7 @@ public class MarcaController {
 	}
 	
 	@GetMapping("/{id}")
-	public HttpEntity<Marca> findById(@PathVariable("id") Long id) {
+	public HttpEntity<Marca> findById(@PathVariable("id") @NotNull @Positive Long id) {
 		Optional<Marca> marca = marcaRepository.findById(id);
 		if(marca.isPresent()) {
 			return ResponseEntity.ok(marca.get());
