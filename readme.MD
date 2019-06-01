@@ -4,6 +4,9 @@
 Este repositório contém o conteúdo passado durante as aulas e exercícios propostos.
 
 #Aulas:
+* Extras:
+  * [Git rebase](./extras/git_rebase.MD)
+  * [Problemas usuais com Git ](./extras/git_problems.MD)
 * Semana 1  
     * [12/03/2019](./aulas/2019_03_12.MD):
       * Projeto do curso
